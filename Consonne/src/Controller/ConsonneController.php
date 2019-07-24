@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConsonneController extends AbstractController
 {
     /**
-     * @Route("/consonne", name="consonne")
+     * @Route("/", name="consonne")
      */
     public function index()
     {
