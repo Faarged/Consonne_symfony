@@ -14,7 +14,6 @@ class MaterielType extends AbstractType
         $builder
             ->add('name')
             ->add('type')
-            ->add('games')
         ;
     }
 
