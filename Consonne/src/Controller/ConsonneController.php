@@ -39,11 +39,15 @@ class ConsonneController extends AbstractController
       $form->handleRequest($request);
 
       if($form->isSubmitted() && $form->isValid()){
+        //Vérifie si compte à créer ou à éditer
         if(!$user->getId()){
+          //Date de création du compte
           $user->setSubAt(new \Datetime());
+          //calcul de l'age
           $date = $user->getSubAt($user);
           $naissance = $user->getBirthDate($user);
           $age = $date->diff($naissance);
+          //ajout du pegi
           if ($age <= 7) {
             $user->setPegi(7);
           }elseif ($age > 7 && $age<= 9) {
