@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\omponent\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -70,6 +71,7 @@ class Users
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="7", minMessage="Votre mot de passe doit comporter au moins 7 caractères")
      */
     private $password;
 
@@ -78,6 +80,9 @@ class Users
      */
     private $reservations;
 
+    /**
+    * @Assert\EqualTo(propertyPath="password", message="erreur de confirmation du mot de passe")
+    */
     public $confirm_password;
 
     public function __construct()
