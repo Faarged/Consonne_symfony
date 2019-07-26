@@ -78,6 +78,8 @@ class Users
      */
     private $reservations;
 
+    public $confirm_password;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();

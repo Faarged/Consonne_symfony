@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% block title %}{% if editMode %}
+Edition de compte
+{% else %}
+  Création de compte
+{% endif %}{% endblock %}
+
+{% form_theme formUser 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+
+  {{ form_start(formUser) }}
+
+  {{ form_row(formUser.name, {'label':'Nom', 'attr':{'placeholder':"Nom"}}) }}
+  {{ form_row(formUser.firstname, {'label':'Prénom', 'attr':{'placeholder':"Prenom"}}) }}
+  {{ form_row(formUser.birthDate, {'label': 'Date de naissance'}) }}
+  {{ form_row(formUser.pseudo, {'label':'Pseudo', 'attr':{'placeholder':"Pseudo"}}) }}
+  {{ form_row(formUser.cardNum, {'label':'Carte', 'attr':{'placeholder':"Numéro de carte"}}) }}
+
+
+  <button type="submit" class="btn btn-success" name="button">
+  {% if editMode %}
+  Enregistrer les modifications
+  {% else %}
+  Créer l'utilisateur
+  {% endif %}
+  </button>
+  {{ form_end(formUser) }}
+
+{% endblock %}
