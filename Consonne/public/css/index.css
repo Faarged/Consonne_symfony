@@ -1,0 +1,57 @@
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+
+
+body {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.formulaire_co{
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+  font-size: 1.1em;
+}
+
+form{
+  max-height:33%;
+  border: solid 2px;
+  padding: 0.3em;
+  background-color: #4DC6F4;
+}
+
+input{
+  height: 2em;
+  font-size: 1em;
+}
+
+button{
+  margin-top: 0.3em;
+  background-color: #B8FFF3;
+}
+
+button:hover{
+  background-color: #5DB3A4;
+  text-decoration: underline;
+}
+
+img {
+  margin-top: 10%;
+}

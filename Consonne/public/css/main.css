@@ -1,0 +1,253 @@
+/* Sommaire du CSS de Consonne Open Source Project V.1
+
+Pour modifier plus facilement ce CSS veuller trouver ci-dessous
+la section ou se trouve l'élément à modifier.
+Par exemple si vous voulez supprimer le header faites un CTRL + F et rechercher
+"1) header" vous n'aurez plus qu'à trouver l'élément à modifier
+dans la section header !
+
+1) intro
+2) header
+3)
+4)
+5)
+
+Merci d'utiliser COSP et de faire vivre ce programme !
+*/
+/*////////////////////////// 1) intro ////////////////////////////////////*/
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: white;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: red
+}
+
+hr {
+  background-color: black;
+  color: black;
+  border: black solid 1px;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: red
+}
+
+h1 {
+  color: #B3826F;
+}
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+hr{
+
+}
+/*////////////////////////// Fin de l'intro ////////////////////////////////////*/
+
+/*////////////////////////// 2) header ////////////////////////////////////*/
+/* section déstiné à l'header et le panel de navigation admin du coté */
+
+/* titre du header */
+header > p {
+  font-size: 2em;
+  padding-top: 0.3em;
+  padding-left: 0.3em;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  text-align: right;
+  }
+
+.head {
+  margin-left: 5%;
+  }
+
+.head {
+  margin-right: 5%;
+  }
+
+.head > p {
+    font-size: 2em;
+}
+/* fin du CSS pour le titre du header */
+
+/* barre de navigation du header */
+.navbar{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+/* style des liens par defaut*/
+.nav > a{
+  color: black;
+  text-decoration: none;
+  font-size: 1.4em;
+}
+/* fin du style par defaut */
+
+/* style des liens en hover */
+.nav > a:hover{
+  color: red;
+  text-decoration: underline;
+}
+/* fin du style avec hover */
+/* fin de la barre de navigation du header */
+
+/*Placement nav admin*/
+.corps{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* début de la navadmin */
+nav {
+  min-width: 20%;
+}
+
+.navadmin{
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  padding: 0.5em;
+}
+/* fin de la navadmin */
+
+/*////////////////////////// fin header ////////////////////////////////////*/
+
+.contenu{
+  padding-left: 1em;
+  padding-right: 0.5em;
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+}
+
+.accueil{
+  padding-left: 15%;
+  padding-right: 0.5em;
+  display: flex;
+  flex: 1;
+  max-width: 70%;
+  flex-flow: column;
+}
+
+table, tr, td{
+  border-collapse: collapse;
+  text-align: center;
+  border: solid 1px black;
+}
+
+tr:hover{
+  background-color: black;
+  color: white;
+}
+
+form{
+  display:flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.radio{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+input {
+  width: 20%;
+  text-align: center;
+}
+
+select {
+  width: 20%;
+  text-align: center;
+}
+
+.bouton {
+  margin-top: 10px;
+    width: 20%;
+    text-align: center;
+}
+
+.breve{
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  padding: 0.5em;
+  margin-top: 0.5em;
+}
+
+#breve_accueil{
+  display: flex;
+  flex-flow: column;
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  padding: 0.5em;
+  margin-top: 0.5em;
+}
+
+.titre{
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+  width: 50%;
+}
+
+#sous-titre{
+  margin-top: 0.5em;
+}
+
+.perso{
+  display: flex;
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
+
+.perso > table{
+  width: 100%;
+}
+.perso > form{
+  width: 100%;
+}
+
+.chgt_pass{
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  width: 50%;
+}
+
+.info{
+  display: flex;
+  flex-flow: column;
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
+/*////////////////////////// X) Footer ////////////////////////////////////*/
+footer {
+  margin-top: auto;
+}
+/*////////////////////////// Fin du footer ////////////////////////////////////*/
