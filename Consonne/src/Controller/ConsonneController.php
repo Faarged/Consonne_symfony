@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\Users;
 use App\Repository\UsersRepository;
@@ -26,7 +27,7 @@ class ConsonneController extends AbstractController
     * @Route("/consonne/new_account", name="create_user")
     * @Route("/consonne/{id}/edit", name="user_edit")
     */
-    public function formUser(Users $user = null, Request $request, ObjectManager $manager){
+    public function formUser(Users $user = null, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
 
       if(!$user){
         $user = new Users();
@@ -42,6 +43,8 @@ class ConsonneController extends AbstractController
           $user->setSubAt(new \Datetime());
         }
 
+        $hash = $encoder->encodePassword($user, $user->getPassword());
+        $user->setPassword($hash);
         $manager->persist($user);
         $manager->flush();
 
