@@ -46,11 +46,11 @@ class ConsonneController extends AbstractController
           $age = $date->diff($naissance);
           if ($age <= 7) {
             $user->setPegi(7);
-          }elseif ($age > 7 and $age<= 9) {
+          }elseif ($age > 7 && $age<= 9) {
             $user->setPegi(9);
-          }elseif ($age > 9 and $age <= 12) {
+          }elseif ($age > 9 && $age <= 12) {
             $user->setPegi(12);
-          }elseif ($age > 12 and $age <= 16) {
+          }elseif ($age > 12 && $age <= 16) {
             $user->setPegi(16);
           }else {
             $user->setPegi(18);

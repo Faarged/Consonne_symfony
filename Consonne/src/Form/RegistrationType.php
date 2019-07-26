@@ -19,7 +19,6 @@ class RegistrationType extends AbstractType
             ->add('birthDate', BirthdayType::class)
             ->add('pseudo')
             ->add('cardNum')
-            ->add('pegi')
             ->add('statut')
             ->add('endSubAt')
             ->add('gameTime')
