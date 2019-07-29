@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% block title %}Liste des adhérents{% endblock %}
+
+{% block body %}
+
+        <div class="titre">
+         <h1>Liste des adhérents</h1>
+         <p>
+           <a href="{{ path('create_user') }}">Créer un compte</a>
+         </p>
+        </div>
+        <div class="perso">
+          <table>
+            <caption>Liste des adhérents</caption>
+            <tr>
+              <td>Nom</td>
+              <td>Prenom</td>
+              <td>Date de naissance</td>
+              <td>Date d'inscription</td>
+              <td>Pseudo</td>
+              <td>Numéro de carte</td>
+              <td>PEGI</td>
+              <td>Fin d'abonnement</td>
+              <td>Temps accordé</td>
+              <td>Modifier le compte</td>
+              <td>Supprimer le compte</td>
+            </tr>
+            {% for users in adherents %}
+            <tr>
+              <td>{{ users.name }}</td>
+              <td>{{ users.firstname }}</td>
+              <td>{{ users.birthDate | date('d/m/Y') }}</td>
+              <td>{{ users.subAt | date('d/m/Y') }}</td>
+              <td>{{ users.pseudo }}</td>
+              <td>{{ users.cardNum }}</td>
+              <td>{{ users.pegi }}</td>
+              <td>{{ users.endSubAt | date('d/m/Y') }}</td>
+              <td>{{ users.gameTime | date('H:i') }}</td>
+              <td><a href="{{ path('user_edit', {'id': users.id}) }}"><i class="fas fa-cogs"></i></a></td>
+              <td><a href=""><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+          </table>
+        </div>
+        {% endfor %}
+{% endblock %}

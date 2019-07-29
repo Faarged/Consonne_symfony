@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationType extends AbstractType
 {
@@ -19,7 +20,13 @@ class RegistrationType extends AbstractType
             ->add('birthDate', BirthdayType::class)
             ->add('pseudo')
             ->add('cardNum')
-            ->add('statut')
+            ->add('statut', ChoiceType::class, [
+              'placeholder' => 'Choix du statut',
+              'choices' => [
+                'Adhérent' => 'adherent',
+                'Administrateur' => 'administrateur'
+              ]
+            ])
             ->add('endSubAt')
             ->add('gameTime')
             ->add('password', PasswordType::class)

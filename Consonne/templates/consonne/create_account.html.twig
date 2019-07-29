@@ -14,6 +14,8 @@ Edition de compte
 
 
 {% block body %}
+  <div class="col-4">
+
 
   {{ form_start(formUser) }}
 
@@ -22,12 +24,11 @@ Edition de compte
   {{ form_row(formUser.birthDate, {'label': 'Date de naissance'}) }}
   {{ form_row(formUser.pseudo, {'label':'Pseudo', 'attr':{'placeholder':"Pseudo"}}) }}
   {{ form_row(formUser.cardNum, {'label':'Carte', 'attr':{'placeholder':"Numéro de carte"}}) }}
-
+  {{ form_row(formUser.statut, {'label':'Statut d\'utilisateur'}) }}
   {{ form_row(formUser.endSubAt, {'label': 'Date de fin d\'abonnement'}) }}
   {{ form_row(formUser.gameTime, {'label': 'Temps de jeu journalier autorisé'}) }}
   {{ form_row(formUser.password, {'label':'Mot de passe', 'attr':{'placeholder':"Votre mot de passe"}}) }}
   {{ form_row(formUser.confirm_password, {'label':'Confirmez votre mot de passe', 'attr':{'placeholder':"Mot de passe"}}) }}
-
 
   <button type="submit" class="btn btn-success" name="button">
   {% if editMode %}
@@ -37,5 +38,6 @@ Edition de compte
   {% endif %}
   </button>
   {{ form_end(formUser) }}
-
+  
+  </div>
 {% endblock %}

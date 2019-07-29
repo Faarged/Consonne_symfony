@@ -46,8 +46,8 @@ class ConsonneController extends AbstractController
           //calcul de l'age
           $date = $user->getSubAt($user);
           $naissance = $user->getBirthDate($user);
-          $age = $date->diff($naissance);
-          $age->format('Y')
+          $age_date = $date->diff($naissance);
+          $age = $age_date->format('%y');
           //ajout du pegi
           if ($age < 7) {
             $user->setPegi(3);
@@ -69,7 +69,7 @@ class ConsonneController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
-      //  return $this->redirectToRoute('my_account', ['id' => $user->getId()]);
+        return $this->redirectToRoute('user_account');
       }
 
       return $this->render('consonne/create_account.html.twig', [
@@ -77,4 +77,20 @@ class ConsonneController extends AbstractController
         'editMode' => $user->getId() !== null
       ]);
     }
+
+    /**
+     * @Route("/consonne/list_adherents", name="user_account")
+     */
+    public function adherents_list(UsersRepository $repo)
+    {
+
+      $liste = $repo->findByStatut('adherent');
+
+        return $this->render('consonne/list_adherents.html.twig', [
+            'adherents' => $liste,
+        ]);
+    }
+
+
+
 }
