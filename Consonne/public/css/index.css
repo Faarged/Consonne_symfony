@@ -29,6 +29,10 @@ html, body {
   font-size: 1.1em;
 }
 
+.form_co{
+  margin-top: 1em;
+}
+
 form{
   border: solid 2px;
   padding: 0.3em;
