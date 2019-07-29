@@ -24,14 +24,12 @@ html, body {
   display: flex;
   flex: 1 1 auto;
   flex-flow: column wrap;
-  justify-content: center;
   align-items: center;
   margin:auto;
   font-size: 1.1em;
 }
 
 form{
-  max-height:33%;
   border: solid 2px;
   padding: 0.3em;
   background-color: #4DC6F4;
