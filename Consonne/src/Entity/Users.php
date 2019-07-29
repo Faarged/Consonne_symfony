@@ -86,9 +86,16 @@ class Users implements UserInterface
     */
     public $confirm_password;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
+     */
+    private $userRoles;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->userRoles = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -230,8 +237,16 @@ class Users implements UserInterface
 
     public function eraseCredentials(){}
     public function getSalt(){}
-    public function getRoles(){ return ['ROLE_USER'];}
-    public function getUsername() {}
+    public function getRoles(){
+        $roles = $this->userRoles->map(function($role){
+          return $role->getLabel();
+        })->toArray();
+         // guarantee every user at least has ROLE_USER
+         $roles[] = 'ROLE_USER';
+
+         return $roles;
+    }
+    public function getUsername() { return $this->pseudo; }
 
     /**
      * @return Collection|Reservation[]
@@ -259,6 +274,32 @@ class Users implements UserInterface
             if ($reservation->getUser() === $this) {
                 $reservation->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getUserRoles(): Collection
+    {
+        return $this->userRoles;
+    }
+
+    public function addUserRole(Role $userRole): self
+    {
+        if (!$this->userRoles->contains($userRole)) {
+            $this->userRoles[] = $userRole;
+        }
+
+        return $this;
+    }
+
+    public function removeUserRole(Role $userRole): self
+    {
+        if ($this->userRoles->contains($userRole)) {
+            $this->userRoles->removeElement($userRole);
         }
 
         return $this;

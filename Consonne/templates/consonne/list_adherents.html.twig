@@ -7,7 +7,7 @@
 {% block title %}Liste des adhérents{% endblock %}
 
 {% block body %}
-
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="titre">
          <h1>Liste des adhérents</h1>
          <p>
@@ -47,5 +47,5 @@
             {% endfor %}
           </table>
         </div>
-
+        {% endif %}
 {% endblock %}

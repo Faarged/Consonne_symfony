@@ -23,12 +23,17 @@ class ConsonneController extends AbstractController
             'controller_name' => 'ConsonneController',
         ]);
     }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){}
     /**
     * @Route("/consonne/new_account", name="create_user")
     * @Route("/consonne/{id}/edit", name="user_edit")
     */
     public function formUser(Users $user = null, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
-
+      $this->denyAccessUnlessGranted('ROLE_ADMIN');
       if(!$user){
         $user = new Users();
       }
@@ -83,7 +88,7 @@ class ConsonneController extends AbstractController
      */
     public function adherents_list(UsersRepository $repo)
     {
-
+      $this->denyAccessUnlessGranted('ROLE_ADMIN');
       $liste = $repo->findByStatut('adherent');
 
         return $this->render('consonne/list_adherents.html.twig', [
@@ -95,7 +100,7 @@ class ConsonneController extends AbstractController
      */
     public function admins_list(UsersRepository $repo)
     {
-
+      $this->denyAccessUnlessGranted('ROLE_ADMIN');
       $liste = $repo->findByStatut('administrateur');
 
         return $this->render('consonne/list_admins.html.twig', [
