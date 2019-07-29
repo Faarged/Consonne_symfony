@@ -90,7 +90,29 @@ class ConsonneController extends AbstractController
             'adherents' => $liste,
         ]);
     }
+    /**
+     * @Route("/consonne/list_admins", name="admin_account")
+     */
+    public function admins_list(UsersRepository $repo)
+    {
 
+      $liste = $repo->findByStatut('administrateur');
+
+        return $this->render('consonne/list_admins.html.twig', [
+            'adherents' => $liste,
+        ]);
+    }
+
+    /**
+    * @Route("/consonne/delete/{id}", name="user_delete")
+    *
+    */
+    public function delete(Users $user, ObjectManager $manager){
+      $manager->remove($user);
+      $manager->flush();
+
+      return $this->redirectToRoute('user_account');
+    }
 
 
 }
