@@ -15,7 +15,7 @@ use App\Form\RegistrationType;
 class ConsonneController extends AbstractController
 {
     /**
-     * @Route("/", name="consonne")
+     * @Route("/consonne", name="consonne")
      */
     public function index()
     {
