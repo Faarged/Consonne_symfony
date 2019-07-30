@@ -8,7 +8,8 @@ security:
         in_database:
           entity:
             class: App\Entity\Users
-            property: pseudo
+            
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

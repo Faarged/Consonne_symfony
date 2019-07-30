@@ -33,11 +33,12 @@ class ConsonneController extends AbstractController
     * @Route("/consonne/{id}/edit", name="user_edit")
     */
     public function formUser(Users $user = null, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+      
       $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
       if(!$user){
         $user = new Users();
       }
-
 
       $form = $this->createForm(RegistrationType::class, $user);
 
