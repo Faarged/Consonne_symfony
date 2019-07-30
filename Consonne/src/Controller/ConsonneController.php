@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\Users;
 use App\Repository\UsersRepository;
+use App\Repository\BrevesRepository;
+use App\Repository\ReservationRepository;
 use App\Form\RegistrationType;
 
 class ConsonneController extends AbstractController
@@ -25,6 +27,20 @@ class ConsonneController extends AbstractController
     }
 
     /**
+    *  @Route("/consonne/home", name="home")
+    */
+    public function home(BrevesRepository $repo, ReservationRepository $resa){
+
+      $liste = $repo->findOneById(['id' => 'desc']);
+      $reserv = $resa->findBy(['id' => 'desc']);
+
+      return $this->render('consonne/home.html.twig', [
+          'breve' => $liste,
+          'resa' => $reserv,
+      ]);
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logout(){}
@@ -33,7 +49,7 @@ class ConsonneController extends AbstractController
     * @Route("/consonne/{id}/edit", name="user_edit")
     */
     public function formUser(Users $user = null, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
-      
+
       $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
       if(!$user){
@@ -105,7 +121,7 @@ class ConsonneController extends AbstractController
       $liste = $repo->findByStatut('administrateur');
 
         return $this->render('consonne/list_admins.html.twig', [
-            'adherents' => $liste,
+            'admins' => $liste,
         ]);
     }
 
