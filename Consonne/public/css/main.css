@@ -29,6 +29,10 @@ body {
   flex-direction: column;
 }
 
+.row{
+  max-width: 100% !important;
+}
+
 a {
   text-decoration: none;
   color: red

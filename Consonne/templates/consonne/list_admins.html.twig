@@ -7,45 +7,47 @@
 {% block title %}Liste des administrateurs{% endblock %}
 
 {% block body %}
-
-        <div class="titre">
-         <h1>Liste des administrateurs</h1>
-         <p>
-           <a href="{{ path('create_user') }}">Créer un compte</a>
-         </p>
+        <div class="contenu col-10">
+          <div class="titre">
+           <h1>Liste des administrateurs</h1>
+           <p>
+             <a href="{{ path('create_user') }}">Créer un compte</a>
+           </p>
+          </div>
+          <div class="perso">
+            <table>
+              <caption>Liste des administrateurs</caption>
+              <tr>
+                <td>Nom</td>
+                <td>Prenom</td>
+                <td>Date de naissance</td>
+                <td>Date d'inscription</td>
+                <td>Pseudo</td>
+                <td>Numéro de carte</td>
+                <td>PEGI</td>
+                <td>Fin d'abonnement</td>
+                <td>Temps accordé</td>
+                <td>Modifier le compte</td>
+                <td>Supprimer le compte</td>
+              </tr>
+              {% for users in adherents %}
+              <tr>
+                <td>{{ users.name }}</td>
+                <td>{{ users.firstname }}</td>
+                <td>{{ users.birthDate | date('d/m/Y') }}</td>
+                <td>{{ users.subAt | date('d/m/Y') }}</td>
+                <td>{{ users.pseudo }}</td>
+                <td>{{ users.cardNum }}</td>
+                <td>{{ users.pegi }}</td>
+                <td>{{ users.endSubAt | date('d/m/Y') }}</td>
+                <td>{{ users.gameTime | date('H:i') }}</td>
+                <td><a href="{{ path('user_edit', {'id': users.id}) }}"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{{ path('user_delete', {'id': users.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
         </div>
-        <div class="perso">
-          <table>
-            <caption>Liste des administrateurs</caption>
-            <tr>
-              <td>Nom</td>
-              <td>Prenom</td>
-              <td>Date de naissance</td>
-              <td>Date d'inscription</td>
-              <td>Pseudo</td>
-              <td>Numéro de carte</td>
-              <td>PEGI</td>
-              <td>Fin d'abonnement</td>
-              <td>Temps accordé</td>
-              <td>Modifier le compte</td>
-              <td>Supprimer le compte</td>
-            </tr>
-            {% for users in adherents %}
-            <tr>
-              <td>{{ users.name }}</td>
-              <td>{{ users.firstname }}</td>
-              <td>{{ users.birthDate | date('d/m/Y') }}</td>
-              <td>{{ users.subAt | date('d/m/Y') }}</td>
-              <td>{{ users.pseudo }}</td>
-              <td>{{ users.cardNum }}</td>
-              <td>{{ users.pegi }}</td>
-              <td>{{ users.endSubAt | date('d/m/Y') }}</td>
-              <td>{{ users.gameTime | date('H:i') }}</td>
-              <td><a href="{{ path('user_edit', {'id': users.id}) }}"><i class="fas fa-cogs"></i></a></td>
-              <td><a href="{{ path('user_delete', {'id': users.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
+      </div>
 
 {% endblock %}

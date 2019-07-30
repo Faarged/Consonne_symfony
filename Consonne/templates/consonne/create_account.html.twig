@@ -14,11 +14,20 @@ Edition de compte
 
 
 {% block body %}
-  <div class="col-4">
+<div class="contenu">
+      <div class="titre">
+      {% if editMode %}
+      <h1>Modification du compte</h1>
+      {% else %}
+      <h1>Création de compte</h1>
+      {% endif %}
+
+      </div>
+  <div class="col-9 d-flex justify-content-center perso">
 
 
   {{ form_start(formUser) }}
-
+  <div class="d-flex flex-column justify-content-center">
   {{ form_row(formUser.name, {'label':'Nom', 'attr':{'placeholder':"Nom"}}) }}
   {{ form_row(formUser.firstname, {'label':'Prénom', 'attr':{'placeholder':"Prenom"}}) }}
   {{ form_row(formUser.birthDate, {'label': 'Date de naissance'}) }}
@@ -37,7 +46,9 @@ Edition de compte
   Créer l'utilisateur
   {% endif %}
   </button>
+  </div>
   {{ form_end(formUser) }}
 
+  </div>
   </div>
 {% endblock %}
