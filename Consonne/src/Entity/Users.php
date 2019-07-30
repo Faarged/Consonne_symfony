@@ -7,9 +7,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @UniqueEntity(
+ *         fields= {"pseudo"},
+ *         message= "Ce pseudo est déjà pris",
+ *                {"cardNum"},
+ *        message= "Ce numéro est déjà attribué"
+ *
+ *)
  */
 class Users implements UserInterface
 {
@@ -42,6 +50,7 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $pseudo;
 
