@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\Users;
+use App\Entity\Role;
 use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
@@ -29,10 +30,10 @@ class ConsonneController extends AbstractController
     /**
     *  @Route("/consonne/home", name="home")
     */
-    public function home(BrevesRepository $repo, ReservationRepository $resa){
+    public function home(BrevesRepository $repo, ReservationRepository $resa, UsersRepository $users){
 
-      $liste = $repo->findOneById(['id' => 'desc']);
-      $reserv = $resa->findBy(['id' => 'desc']);
+      $liste = $repo->findLast();
+      $reserv = $resa->findToday();
 
       return $this->render('consonne/home.html.twig', [
           'breve' => $liste,

@@ -34,35 +34,33 @@
         {% if is_granted('ROLE_ADMIN') %}
         <div class="row corps">
 
+          <div class="navadmin col-2">
+            <nav>
 
-        <div class="navadmin col-2">
-          <nav>
-
-            <h3>Administration</h3>
-            <ul>
-              <li><a href="{{ path('user_account') }}">Adhérents</a></li>
-              <li><a href="{{ path('admin_account') }}">Administrateurs</a></li>
-              <li><a href="breves.php">Brèves</a></li>
-              <li><a href="materiel.php">Matériel</a></li>
-              <li><a href="liste_jeux.php">Liste des jeux</a></li>
-              <li><a href="liste_reservation.php">Liste des réservations</a></li>
-              <li><a href="configuration.php">Configuration</a></li>
-              <li><a href="stats.php">Statistiques</a></li>
-            <ul>
-          </nav>
-        </div>
+              <h3>Administration</h3>
+              <ul>
+                <li><a href="{{ path('user_account') }}">Adhérents</a></li>
+                <li><a href="{{ path('admin_account') }}">Administrateurs</a></li>
+                <li><a href="breves.php">Brèves</a></li>
+                <li><a href="materiel.php">Matériel</a></li>
+                <li><a href="liste_jeux.php">Liste des jeux</a></li>
+                <li><a href="liste_reservation.php">Liste des réservations</a></li>
+                <li><a href="configuration.php">Configuration</a></li>
+                <li><a href="stats.php">Statistiques</a></li>
+              <ul>
+            </nav>
+          </div>
       {% endif %}
         {% block body %}{% endblock %}
 
         {% if app.user %}
         <footer class="d-flex flex-column w-100 text-dark">
-        <div class="col-12 ">
-        <hr>
-        </div>
-        <div class="col-12 text-center">
-        <center>@Consonne Open Source Project - 2019<center>
-        </div>
-
+          <div class="col-12 ">
+            <hr>
+          </div>
+          <div class="col-12 text-center">
+            <center>@Consonne Open Source Project - 2019<center>
+          </div>
         </footer>
         {% endif %}
 

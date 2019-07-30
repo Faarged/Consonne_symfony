@@ -43,15 +43,34 @@
                   </table>
                 </div>
                 {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') == false %}
+                <div class="ingame_time">
+                  <table>
+                    <caption>Mes réservations du jours</caption>
+                    <tr>
+                      <td>Heure de réservation</td>
+                      <td>Temps utilisé</td>
+                    </tr>
+                    {% for reservation in resa %}
+                    <tr>
+                      <td>{{ reservation.startAt | date('H:i') }}</td>
+                      <td>{{ reservation.duree | date('H:i') }}</td>
+                    </tr>
+                  {% endfor %}
+                  </table>
+                </div>
+                {% endif %}
+
                 <section id="breve_accueil">
                   <div class="titre" id="sous-titre">
                     <h3>Brèves</h3>
                   </div>
                   <div class="breve">
-                  {% for breves in breve %}
-                    <h4>{{ breves.title }}</h4>
-                    <p>{{ breves.content }}</p>
-                  {% endfor %}
+
+                    <h4>{{ breve.title }}</h4>
+                    <p>{{ breve.content }}</p>
+
                   </div>
                 </section>
                 </div>

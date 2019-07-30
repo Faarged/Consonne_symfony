@@ -19,6 +19,16 @@ class BrevesRepository extends ServiceEntityRepository
         parent::__construct($registry, Breves::class);
     }
 
+  public function findLast()
+  {
+    return $this->createQueryBuilder('b')
+              ->orderBy('b.id', 'DESC')
+              ->setMaxResults(1)
+              ->getQuery()
+              ->getOneOrNullResult()
+            ;
+  }
+
     // /**
     //  * @return Breves[] Returns an array of Breves objects
     //  */
