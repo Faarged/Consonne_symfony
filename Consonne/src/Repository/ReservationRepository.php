@@ -25,7 +25,7 @@ class ReservationRepository extends ServiceEntityRepository
                 ->andWhere('r.user = :utilisateur')
                 ->setParameter('utilisateur', $user)
                 //->andWhere('r.createdAt | date(\'d/m/y\') = :today')
-                //->setParameter('today', new \DateTime() | date('d/m/Y'))
+                //->setParameter('today', new \DateTime | date('d/m/Y'))
                 ->orderBy('r.createdAt', 'DESC')
                 ->setMaxResults(5)
                 ->getQuery()
@@ -37,7 +37,7 @@ class ReservationRepository extends ServiceEntityRepository
     {
       return $this->createQueryBuilder('r')
                   //->andWhere('r.createdAt | date(\'d/m/y\') = :today')
-                  //->setParameter('today', new \DateTime() | date('d/m/Y'))
+                  //->setParameter('today', new \DateTime | date('d/m/Y'))
                   //->andWhere('r.startAt')
                   ->orderBy('r.createdAt', 'DESC')
                   ->setMaxResults(5)

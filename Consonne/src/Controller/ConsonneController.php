@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\Users;
-use App\Entity\Role;
+use App\Entity\Breves;
+
 use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
 use App\Form\RegistrationType;
+use App\Form\BreveType;
 
 class ConsonneController extends AbstractController
 {
@@ -52,6 +54,32 @@ class ConsonneController extends AbstractController
      * @Route("/logout", name="logout")
      */
     public function logout(){}
+
+    /**
+    *  @Route("/consonne/new_breves", name="new_breves")
+    */
+    public function formBreves(Request $request, ObjectManager $manager){
+
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      if($this->getUser()->getIsAdmin()){
+       // si c'est true alors il est admin, tu fais ton code
+       $breve = new Breves();
+       $form = $this->createForm(BreveType::class, $breve);
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid()){
+         $manager->persist($breve);
+         $manager->flush();
+         return $this->redirectToRoute('breves');
+       }
+       return $this->render('consonne/create_breve.html.twig', [
+         'formBreve' => $form->createView(),
+       ]);
+      } else {
+        // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
+        return $this->redirectToRoute('home');
+      }
+    }
     /**
     * @Route("/consonne/new_account", name="create_user")
     * @Route("/consonne/{id}/edit", name="user_edit")
@@ -156,16 +184,46 @@ class ConsonneController extends AbstractController
         }
 
     }
+    /**
+     * @Route("/consonne/list_breves", name="breves")
+     */
+    public function breves_list(BrevesRepository $repo)
+    {
+       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if($this->getUser()->getIsAdmin()){
+         // si c'est true alors il est admin, tu fais ton code
+         $liste = $repo->findAll();
+
+           return $this->render('consonne/list_breves.html.twig', [
+               'breves' => $liste,
+           ]);
+        } else {
+          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
+          return $this->redirectToRoute('home');
+        }
+
+    }
 
     /**
     * @Route("/consonne/delete/{id}", name="user_delete")
     *
     */
-    public function delete(Users $user, ObjectManager $manager){
+    public function delete_user(Users $user, ObjectManager $manager){
       $manager->remove($user);
       $manager->flush();
 
       return $this->redirectToRoute('user_account');
+    }
+    /**
+    * @Route("/consonne/delete/breve/{id}", name="breve_delete")
+    *
+    */
+    public function delete_breve(Breves $breve, ObjectManager $manager){
+      $manager->remove($breve);
+      $manager->flush();
+
+      return $this->redirectToRoute('breves');
     }
 
 
