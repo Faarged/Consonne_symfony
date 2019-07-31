@@ -51,7 +51,7 @@ class ConsonneController extends AbstractController
     */
     public function formUser(Users $user = null, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
 
-      $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
 
       if(!$user){
         $user = new Users();
@@ -106,7 +106,7 @@ class ConsonneController extends AbstractController
      */
     public function adherents_list(UsersRepository $repo)
     {
-      $this->denyAccessUnlessGranted('ROLE_ADMIN');
+      $this->denyAccessUnlessGranted('isAdmin');
       $liste = $repo->findByStatut('adherent');
 
         return $this->render('consonne/list_adherents.html.twig', [

@@ -31,7 +31,7 @@
           <hr>
         </header>
         {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
+        {% if app.user.isAdmin %}
         <div class="row corps">
 
           <div class="navadmin col-2">

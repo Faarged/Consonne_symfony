@@ -33,13 +33,7 @@ class RegistrationType extends AbstractType
             ->add('gameTime')
             ->add('password', PasswordType::class)
             ->add('confirm_password', PasswordType::class)
-            ->add('userRoles', EntityType::class, [
-              'class' => Role::class,
-              'choice_label' => 'label',
-              'required' => false,
-              'placeholder' => 'Choisir le role',
-              'label' => 'Role utilisateur'
-            ])
+            ->add('isAdmin')
         ;
     }
 

@@ -11,14 +11,14 @@
                 <div class="titre">
                   <h1>Accueil</h1>
                 <h2>Bienvenue {{ app.user.pseudo }}</h2>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if app.user.isAdmin %}
                   <p>
                     <a href="{{ path('create_user') }}">Créer un nouveau compte</a><br>
                     <a href="">Créer un nouveau matériel</a>
                   </p>
                   {% endif %}
                 </div>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if app.user.isAdmin %}
                 <div class="perso">
                   <table><br>
                     <caption>Les prochains départs</caption>
@@ -44,7 +44,7 @@
                 </div>
                 {% endif %}
 
-                {% if is_granted('ROLE_ADMIN') == false %}
+                {% if app.user.isAdmin == false %}
                 <div class="ingame_time">
                   <table>
                     <caption>Mes réservations du jours</caption>

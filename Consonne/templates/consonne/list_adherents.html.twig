@@ -7,7 +7,7 @@
 {% block title %}Liste des adhérents{% endblock %}
 
 {% block body %}
-        {% if is_granted('ROLE_ADMIN') %}
+        {% if app.user.isAdmin %}
         <div class="contenu col-10">
           <div class="titre">
            <h1>Liste des adhérents</h1>
