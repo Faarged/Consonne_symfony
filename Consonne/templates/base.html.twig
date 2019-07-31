@@ -30,7 +30,7 @@
           </div>
           <hr>
         </header>
-        {% endif %}
+
         {% if app.user.isAdmin %}
         <div class="row corps">
 
@@ -50,6 +50,7 @@
               <ul>
             </nav>
           </div>
+      {% endif %}
       {% endif %}
         {% block body %}{% endblock %}
 

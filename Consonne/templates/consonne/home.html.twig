@@ -30,14 +30,14 @@
                       <td>Durée utilisée</td>
                       <td>Temps maximum</td>
                     </tr>
-                    {% for reservation in resa %}
+                    {% for reservation in end %}
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{{ reservation.user.name }}</td>
+                      <td>{{ reservation.user.firstname }}</td>
+                      <td>{{ reservation.user.cardNum}}</td>
+                      <td>{{ reservation.startAt | date('H:i') }}</td>
+                      <td>{{ reservation.duree | date('H:i') }}</td>
+                      <td>{{ reservation.user.gameTime | date('H:i') }}</td>
                     </tr>
                   {% endfor %}
                   </table>
