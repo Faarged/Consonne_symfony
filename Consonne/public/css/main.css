@@ -27,6 +27,7 @@ body {
   margin: 0px;
   display: flex;
   flex-direction: column;
+  font-size: 1em;
 }
 
 .row{
@@ -255,3 +256,11 @@ footer {
   margin-top: auto;
 }
 /*////////////////////////// Fin du footer ////////////////////////////////////*/
+@media screen and (max-width:640px){
+  .head > p{
+    font-size: 1.5em;
+  }
+  .titre{
+    margin-top: 0.5em;
+  }
+}
