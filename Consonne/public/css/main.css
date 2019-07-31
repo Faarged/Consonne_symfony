@@ -31,6 +31,8 @@ body {
 
 .row{
   max-width: 100% !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
 a {
@@ -118,7 +120,6 @@ header > p {
 
 /*Placement nav admin*/
 .corps{
-  display: flex;
   flex-flow: row wrap;
 }
 
@@ -145,12 +146,12 @@ nav {
 }
 
 .accueil{
-  padding-left: 15%;
+  padding-top: 0.5em;
+  padding-left: 0.5em;
   padding-right: 0.5em;
-  display: flex;
   flex: 1;
-  max-width: 70%;
   flex-flow: column;
+  max-width: 100%;
 }
 
 table, tr, td{
@@ -212,7 +213,6 @@ select {
   box-shadow: 2px 2px 5px #B3826F;
   margin-bottom: 0.5em;
   padding-left: 0.5em;
-  width: 50%;
 }
 
 #sous-titre{
