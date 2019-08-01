@@ -53,10 +53,12 @@
                       <td>Temps utilisé</td>
                     </tr>
                     {% for reservation in resa %}
+
                     <tr>
                       <td>{{ reservation.startAt | date('H:i') }}</td>
                       <td>{{ reservation.duree | date('H:i') }}</td>
                     </tr>
+                  
                   {% endfor %}
                   </table>
                 </div>

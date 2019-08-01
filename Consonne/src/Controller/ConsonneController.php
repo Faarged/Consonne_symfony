@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\Users;
 use App\Entity\Breves;
+use App\Entity\Reservation;
 
 use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
@@ -17,16 +18,18 @@ use App\Repository\ReservationRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
 
+
+/**
+*
+*/
 class ConsonneController extends AbstractController
 {
     /**
-     * @Route("/consonne", name="consonne")
+     * @Route("/", name="consonne")
      */
     public function index()
     {
-        return $this->render('consonne/index.html.twig', [
-            'controller_name' => 'ConsonneController',
-        ]);
+        return $this->render('consonne/index.html.twig');
     }
 
     /**
@@ -34,18 +37,35 @@ class ConsonneController extends AbstractController
     */
     public function home(BrevesRepository $repo, ReservationRepository $resa, UsersRepository $users){
 
-       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-      $user= $this->getUser()->getId();
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      $user= $this->getUser();
+      $today = new \DateTime();
+
       //dernière brèves créée
       $liste = $repo->findLast();
+
       //pour adhérents: liste des réserv du jour
-      $reserv = $resa->findToday($user);
+      $res = $user->getReservations();
+      $cur_resa = [];
+      $i = 0;
+      foreach ($res as $value) {
+        $date = $value->getCreatedAt();
+        $interval = date_diff($date, $today);
+
+        if ($interval->format('%R%a') > 0) {
+
+        }else{
+          $cur_resa[$i++] = $value;
+        }
+      }
+
+
       //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
       $endresa = $resa->endresa();
 
       return $this->render('consonne/home.html.twig', [
           'breve' => $liste,
-          'resa' => $reserv,
+          'resa' => $cur_resa,
           'end' => $endresa,
       ]);
     }
