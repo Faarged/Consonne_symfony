@@ -19,32 +19,9 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function findToday($user)
-    {
-      return $this->createQueryBuilder('r')
-                ->andWhere('r.user = :utilisateur')
-                ->setParameter('utilisateur', $user)
-                ->andWhere('r.createdAt = :today')
-                ->setParameter('today', new \DateTime())
-                ->orderBy('r.createdAt', 'DESC')
-                ->setMaxResults(5)
-                ->getQuery()
-                ->getResult()
-              ;
-    }
 
-    public function endresa()
-    {
-      return $this->createQueryBuilder('r')
-                  //->andWhere('r.createdAt | date(\'d/m/y\') = :today')
-                  //->setParameter('today', new \DateTime | date('d/m/Y'))
-                  //->andWhere('r.startAt')
-                  ->orderBy('r.createdAt', 'DESC')
-                  ->setMaxResults(5)
-                  ->getQuery()
-                  ->getResult()
-                ;
-    }
+
+    
 
     // /**
     //  * @return Reservation[] Returns an array of Reservation objects

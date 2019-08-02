@@ -22,7 +22,7 @@ class Reservation
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="time")
      */
     private $startAt;
 
