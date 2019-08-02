@@ -142,6 +142,14 @@ class ConsonneController extends AbstractController
             }else {
               $user->setPegi(18);
             }
+            //vérification du statut
+            $statu = $user->getStatut($user);
+            //détermination du isAdmin
+            if ($statu == 'administrateur') {
+              $user->setIsAdmin(TRUE);
+            }else{
+              $user->setIsAdmin(FALSE);
+            }
           }
 
           $hash = $encoder->encodePassword($user, $user->getPassword());

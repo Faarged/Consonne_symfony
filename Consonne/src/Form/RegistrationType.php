@@ -33,7 +33,7 @@ class RegistrationType extends AbstractType
             ->add('gameTime')
             ->add('password', PasswordType::class)
             ->add('confirm_password', PasswordType::class)
-            ->add('isAdmin')
+            //->add('isAdmin')
         ;
     }
 

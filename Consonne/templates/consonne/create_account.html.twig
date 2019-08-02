@@ -38,7 +38,6 @@ Edition de compte
   {{ form_row(formUser.gameTime, {'label': 'Temps de jeu journalier autorisé'}) }}
   {{ form_row(formUser.password, {'label':'Mot de passe', 'attr':{'placeholder':"Votre mot de passe"}}) }}
   {{ form_row(formUser.confirm_password, {'label':'Confirmez votre mot de passe', 'attr':{'placeholder':"Mot de passe"}}) }}
-  {{ form_row(formUser.isAdmin, {'label': 'Cocher si compte administrateur', 'attr':{'class':"flex-column"}}) }}
 
   <button type="submit" class="btn btn-success" name="button">
   {% if editMode %}
