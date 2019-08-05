@@ -12,7 +12,6 @@ class ConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('days')
             ->add('openAt')
             ->add('closeAt')
         ;

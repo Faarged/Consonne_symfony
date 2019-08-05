@@ -11,10 +11,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Users;
 use App\Entity\Breves;
 use App\Entity\Reservation;
+use App\Entity\Materiel;
 
 use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\MaterielRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
 
@@ -250,7 +252,39 @@ class ConsonneController extends AbstractController
     }
 
     /**
-    * @Route("/consonne/delete/{id}", name="user_delete")
+     * @Route("/consonne/list_materiel", name="materiel")
+     */
+    public function materiel_list(MaterielRepository $repo)
+    {
+       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if($this->getUser()->getIsAdmin()){
+         // si c'est true alors il est admin, tu fais ton code
+         $liste = $repo->findAll();
+
+           return $this->render('consonne/list_materiel.html.twig', [
+               'materiels' => $liste,
+           ]);
+        } else {
+          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
+          return $this->redirectToRoute('home');
+        }
+
+    }
+
+    /**
+    * @Route("/consonne/delete/materiel/{id}", name="materiel_delete")
+    *
+    */
+    public function delete_materiel(Materiel $materiel, ObjectManager $manager){
+      $manager->remove($materiel);
+      $manager->flush();
+
+      return $this->redirectToRoute('materiel');
+    }
+
+    /**
+    * @Route("/consonne/delete/user/{id}", name="user_delete")
     *
     */
     public function delete_user(Users $user, ObjectManager $manager){

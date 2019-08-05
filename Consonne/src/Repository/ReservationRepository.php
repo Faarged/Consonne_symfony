@@ -21,7 +21,11 @@ class ReservationRepository extends ServiceEntityRepository
 
 
 
-    
+    /* public function resaAdminHome(){
+      $request = $this->createQueryBuilder('r')
+                      ->andWhere('r.createdAt = :days')
+                      setParameter('days', $)
+    }  */
 
     // /**
     //  * @return Reservation[] Returns an array of Reservation objects
