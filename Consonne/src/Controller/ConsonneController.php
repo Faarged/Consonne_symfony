@@ -62,9 +62,8 @@ class ConsonneController extends AbstractController
           $cur_resa[$i++] = $value;
         }
       }
-
-
       //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
+      //NE MARCHE PAS
       $endresa = $resa->findAll();
       $reservations = [];
       $i = 0;
@@ -92,13 +91,15 @@ class ConsonneController extends AbstractController
     /**
     * @Route("/consonne/my_account", name="account")
     */
-    public function changePass(Request $request, ObjectManager $manager){
+    public function changePass(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       $user = $this->getUser();
       $form = $this->createForm(UserType::class, $user);
       $form->handleRequest($request);
 
       if($form->isSubmitted() && $form->isValid()){
+        $hash = $encoder->encodePassword($user, $user->getPassword());
+        $user->setPassword($hash);
         $manager->persist($user);
         $manager->flush();
         return $this->redirectToRoute('account');
