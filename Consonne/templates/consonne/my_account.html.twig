@@ -55,10 +55,12 @@
                  <td>Date de fin d'inscription:</td>
                  <td>{{ app.user.endSubAt | date('d/m/Y') }}</td>
                </tr>
+               {% if app.user.isAdmin == false %}
                <tr>
                  <td>Mon temps de jeu:</td>
                  <td>{{ app.user.gameTime | date('H:i') }}</td>
                </tr>
+             {% endif %}
              </table>
            </div>
 
