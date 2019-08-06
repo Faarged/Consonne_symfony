@@ -143,6 +143,7 @@ nav {
   padding-right: 0.5em;
   display: flex;
   flex-flow: column;
+  flex:1;
 }
 
 .accueil{
@@ -262,4 +263,15 @@ footer {
   .titre{
     margin-top: 0.5em;
   }
+  .navadmin{
+    width:90%;
+    text-align: center;
+  }
+  .contenu{
+
+  }
+}
+@media screen and (max-width:640px){
+
+  
 }
