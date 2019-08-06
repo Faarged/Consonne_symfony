@@ -14,7 +14,7 @@
                 {% if app.user.isAdmin %}
                   <p>
                     <a href="{{ path('create_user') }}">Créer un nouveau compte</a><br>
-                    <a href="#">Créer un nouveau matériel</a>
+                    <a href="{{ path('create_materiel') }}">Créer un nouveau matériel</a>
                   </p>
                   {% endif %}
                 </div>

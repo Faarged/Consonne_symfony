@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Users;
-use App\Entity\Role;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

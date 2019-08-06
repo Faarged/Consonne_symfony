@@ -20,6 +20,7 @@ use App\Repository\MaterielRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
 use App\Form\MaterielType;
+use App\Form\UserType;
 
 
 /**
@@ -86,6 +87,24 @@ class ConsonneController extends AbstractController
           'breve' => $liste,
           'resa' => $cur_resa,
           'end' => $reservations,
+      ]);
+    }
+    /**
+    * @Route("/consonne/my_account", name="account")
+    */
+    public function changePass(Request $request, ObjectManager $manager){
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      $user = $this->getUser();
+      $form = $this->createForm(UserType::class, $user);
+      $form->handleRequest($request);
+
+      if($form->isSubmitted() && $form->isValid()){
+        $manager->persist($user);
+        $manager->flush();
+        return $this->redirectToRoute('account');
+      }
+      return $this->render('consonne/my_account.html.twig', [
+        'formUser' => $form->createView(),
       ]);
     }
 

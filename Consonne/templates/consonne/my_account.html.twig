@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% form_theme formUser 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+
+    <div class="contenu">
+           <div class="titre">
+             <h1>Mon compte</h1>
+             <h2>Données de {{ app.user.pseudo }}</h2>
+           </div>
+           <div class="perso">
+             <table>
+               <caption>Mes données personnelles</caption>
+
+               <tr>
+                 <td>Nom:</td>
+                 <td>{{ app.user.name }}</td>
+               </tr>
+               <tr>
+                 <td>Prenom:</td>
+                 <td>{{ app.user.firstname }}</td>
+               </tr>
+               <tr>
+                 <td>Date de naissance:</td>
+                 <td>{{ app.user.birthDate | date('d/m/Y') }}</td>
+               </tr>
+               <tr>
+                 <td>Date d'inscription</td>
+                 <td>{{ app.user.subAt | date('d/m/Y') }}</td>
+               </tr>
+               <tr>
+                 <td>Pseudo:</td>
+                 <td>{{ app.user.pseudo }}</td>
+               </tr>
+               <tr>
+                 <td>Numéro de carte</td>
+                 <td>{{ app.user.cardNum }}</td>
+               </tr>
+               <tr>
+                 <td>PEGI:</td>
+                 <td>{{ app.user.pegi }}</td>
+               </tr>
+               <tr>
+                 <td>Statut:</td>
+                 <td>{{ app.user.statut }}</td>
+               </tr>
+               <tr>
+                 <td>Date de fin d'inscription:</td>
+                 <td>{{ app.user.endSubAt | date('d/m/Y') }}</td>
+               </tr>
+               <tr>
+                 <td>Mon temps de jeu:</td>
+                 <td>{{ app.user.gameTime | date('H:i') }}</td>
+               </tr>
+             </table>
+           </div>
+
+
+           <div class="">
+             <h2>Changement de mot de passe</h2>
+             {{ form_start(formUser) }}
+             {{ form_row(formUser.password, {'label': 'Choisissez votre nouveau mot de passe', 'attr':{'placeholder':"Nouveau mot de passe"}}) }}
+             {{ form_row(formUser.confirm_password, {'label': 'Confirmez le mot de passe', 'attr':{'placeholder':"Confimation du mot de passe"}}) }}
+             <button type="submit" class="btn btn-success" name="button">Valider</button>
+             {{ form_end(formUser) }}
+           </div>
+
+
+           {% if app.user.isAdmin == false %}
+           <div class="perso">
+             <table>
+               <caption>Liste des jeux auxquels j'ai accès</caption>
+               <tr>
+                 <td><strong>Titre</strong></td>
+                 <td><strong>PEGI</strong></td>
+                 <td><strong>Support(s)</strong></td>
+               </tr>
+               <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+               </tr>
+             </table>
+           </div>
+         {% endif %}
+         </div>
+       </div>
+{% endblock %}
