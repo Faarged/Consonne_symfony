@@ -19,6 +19,7 @@ use App\Repository\ReservationRepository;
 use App\Repository\MaterielRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
+use App\Form\MaterielType;
 
 
 /**
@@ -114,7 +115,32 @@ class ConsonneController extends AbstractController
          'formBreve' => $form->createView(),
        ]);
       } else {
-        // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
+        // il n'est pas admin
+        return $this->redirectToRoute('home');
+      }
+    }
+    /**
+    *  @Route("/consonne/new_materiel", name="create_materiel")
+    */
+    public function formMateriel(Request $request, ObjectManager $manager){
+
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      if($this->getUser()->getIsAdmin()){
+       // si c'est true alors il est admin, tu fais ton code
+       $materiel = new Materiel();
+       $form = $this->createForm(MaterielType::class, $materiel);
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid()){
+         $manager->persist($materiel);
+         $manager->flush();
+         return $this->redirectToRoute('materiel');
+       }
+       return $this->render('consonne/create_materiel.html.twig', [
+         'formMateriel' => $form->createView(),
+       ]);
+      } else {
+        // il n'est pas admin
         return $this->redirectToRoute('home');
       }
     }

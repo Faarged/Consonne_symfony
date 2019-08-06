@@ -6,6 +6,7 @@ use App\Entity\Materiel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class MaterielType extends AbstractType
 {
@@ -13,7 +14,14 @@ class MaterielType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+              'placeholder' => 'Type de matériel',
+              'choices' => [
+                'Console' => 'console',
+                'pc' => 'pc',
+                'Manette' => 'manette'
+              ]
+            ])
         ;
     }
 
