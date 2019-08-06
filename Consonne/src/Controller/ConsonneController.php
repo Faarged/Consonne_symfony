@@ -12,11 +12,13 @@ use App\Entity\Users;
 use App\Entity\Breves;
 use App\Entity\Reservation;
 use App\Entity\Materiel;
+use App\Entity\Game;
 
 use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\MaterielRepository;
+use App\Repository\GameRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
 use App\Form\MaterielType;
@@ -317,6 +319,26 @@ class ConsonneController extends AbstractController
         }
 
     }
+    /**
+     * @Route("/consonne/list_games", name="games")
+     */
+    public function game_list(GameRepository $repo)
+    {
+       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if($this->getUser()->getIsAdmin()){
+         // si c'est true alors il est admin, tu fais ton code
+         $liste = $repo->findAll();
+
+           return $this->render('consonne/list_games.html.twig', [
+               'games' => $liste,
+           ]);
+        } else {
+          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
+          return $this->redirectToRoute('home');
+        }
+
+    }
 
     /**
     * @Route("/consonne/delete/materiel/{id}", name="materiel_delete")
@@ -328,7 +350,16 @@ class ConsonneController extends AbstractController
 
       return $this->redirectToRoute('materiel');
     }
+    /**
+    * @Route("/consonne/delete/games/{id}", name="game_delete")
+    *
+    */
+    public function delete_game(Game $game, ObjectManager $manager){
+      $manager->remove($game);
+      $manager->flush();
 
+      return $this->redirectToRoute('games');
+    }
     /**
     * @Route("/consonne/delete/user/{id}", name="user_delete")
     *
