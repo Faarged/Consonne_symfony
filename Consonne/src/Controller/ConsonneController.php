@@ -22,6 +22,7 @@ use App\Repository\GameRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
 use App\Form\MaterielType;
+use App\Form\GameType;
 use App\Form\UserType;
 
 
@@ -160,6 +161,36 @@ class ConsonneController extends AbstractController
        }
        return $this->render('consonne/create_materiel.html.twig', [
          'formMateriel' => $form->createView(),
+       ]);
+      } else {
+        // il n'est pas admin
+        return $this->redirectToRoute('home');
+      }
+    }
+    /**
+    *  @Route("/consonne/new_game", name="create_game")
+    */
+    public function formGame(Request $request, ObjectManager $manager, MaterielRepository $rep){
+
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      if($this->getUser()->getIsAdmin()){
+       // si c'est true alors il est admin, tu fais ton code
+       $game = new Game();
+       $form = $this->createForm(GameType::class, $game);
+       $form->handleRequest($request);
+
+       if($form->isSubmitted() && $form->isValid()){
+         $id_supports = $request->request->get('game')['support'];
+         foreach($id_supports as $id_support){
+           $support = $rep->find($id_support);
+           $game->addSupport($support);
+         }
+         $manager->persist($game);
+         $manager->flush();
+         return $this->redirectToRoute('games');
+       }
+       return $this->render('consonne/create_game.html.twig', [
+         'formGame' => $form->createView(),
        ]);
       } else {
         // il n'est pas admin

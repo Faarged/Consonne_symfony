@@ -19,6 +19,12 @@ class MaterielRepository extends ServiceEntityRepository
         parent::__construct($registry, Materiel::class);
     }
 
+  public function getAll()
+  {
+    return $this->createQueryBuilder('m')
+                ->andWhere('m.type != :type')
+                ->setParameter('type', "manette");
+  }
     // /**
     //  * @return Materiel[] Returns an array of Materiel objects
     //  */

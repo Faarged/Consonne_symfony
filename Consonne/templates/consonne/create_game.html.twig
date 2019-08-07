@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% block title %}
+Ajout de jeu
+{% endblock %}
+
+{% form_theme formGame 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+  <div class="contenu">
+    <div class="titre">
+      <h1>Ajout de jeu</h1>
+    </div>
+    <div class="perso">
+          {{ form_start(formGame) }}
+          {{ form_row(formGame.title, {'label': 'Titre du jeu', 'attr':{'placeholder':"Titre du jeu"}}) }}
+          {{ form_row(formGame.pegi) }}
+          {{ form_row(formGame.support) }}
+          <button type="submit" class="btn btn-success" name="button">Ajouter ce jeu</button>
+          {{ form_end(formGame) }}
+        </div>
+  </div>
+</div>
+{% endblock %}
