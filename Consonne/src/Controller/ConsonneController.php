@@ -310,6 +310,26 @@ class ConsonneController extends AbstractController
 
     }
     /**
+     * @Route("/consonne/list_resa", name="allresa")
+     */
+    public function allresa(ReservationRepository $repo)
+    {
+       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+       if($this->getUser()->getIsAdmin()){
+        // si c'est true alors il est admin, tu fais ton code
+        $liste = $repo->findAll();
+
+          return $this->render('consonne/list_resa.html.twig', [
+              'reservations' => $liste,
+          ]);
+       } else {
+         // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
+         return $this->redirectToRoute('home');
+       }
+
+    }
+    /**
      * @Route("/consonne/list_breves", name="breves")
      */
     public function breves_list(BrevesRepository $repo)
@@ -410,6 +430,16 @@ class ConsonneController extends AbstractController
       $manager->flush();
 
       return $this->redirectToRoute('breves');
+    }
+    /**
+    * @Route("/consonne/delete/resa/{id}", name="resa_delete")
+    *
+    */
+    public function delete_resa(Reservation $resa, ObjectManager $manager){
+      $manager->remove($resa);
+      $manager->flush();
+
+      return $this->redirectToRoute('allresa');
     }
 
 

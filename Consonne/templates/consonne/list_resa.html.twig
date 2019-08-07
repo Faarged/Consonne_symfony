@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block body %}
+        <div class="contenu col-xs-12 col-m-10">
+          <div class="titre">
+           <h1>Liste des réservations</h1>
+           <p>
+            {# <a href="{{ path('create_user') }}">Créer une réservation</a>#}
+           </p>
+          </div>
+          <div class="perso">
+            <table>
+              <caption>Liste des réservations</caption>
+              <tr>
+                <td>Pseudo</td>
+                <td>Date de réservation</td>
+                <td>Heure de début</td>
+                <td>Durée</td>
+                <td>Matériel</td>
+                <td>Jeu</td>
+                <td>Supprimer la réservation</td>
+              </tr>
+              {% for resa in reservations %}
+              <tr>
+                <td>{{ resa.user.pseudo }}</td>
+                <td>{{ resa.createdAt | date('d/m/y') }}</td>
+                <td>{{ resa.startAt | date('H:i') }}</td>
+                <td>{{ resa.duree | date('H:i') }}</td>
+                <td>{{ resa.materiel }}</td>
+                <td>{{ resa.game }}</td>
+                <td><a href="{{ path('resa_delete', {'id': resa.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
