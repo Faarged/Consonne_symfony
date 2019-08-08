@@ -19,8 +19,10 @@ use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\MaterielRepository;
 use App\Repository\GameRepository;
+
 use App\Form\RegistrationType;
 use App\Form\BreveType;
+use App\Form\ReservationType;
 use App\Form\MaterielType;
 use App\Form\GameType;
 use App\Form\UserType;
@@ -110,6 +112,38 @@ class ConsonneController extends AbstractController
       return $this->render('consonne/my_account.html.twig', [
         'formUser' => $form->createView(),
       ]);
+    }
+
+    /**
+    * @Route("/consonne/reservations", name="reservation")
+    */
+    public function createResa(ReservationRepository $repo, Request $request, ObjectManager $manager){
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      $user = $this->getUser();
+      if($this->getUser()->getIsAdmin()){
+        $reservation = new Reservation();
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+          $reservation->setCreatedAt(new \Datetime());
+          $reservation->setStartedAt(new \Datetime());
+          $manager->persist($reservation);
+          $manager->flush();
+          return $this->redirectToRoute('reservation');
+        }
+
+        return $this->render('consonne/reservation.html.twig', [
+          'formResa' => $form->createView(),
+        ]);
+
+      }else{
+        $liste = $repo->findByUser($user);
+
+        return $this->render('consonne/reservation.html.twig', [
+          'resas' => $liste
+        ]);
+      }
     }
 
     /**
@@ -327,8 +361,8 @@ class ConsonneController extends AbstractController
          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
          return $this->redirectToRoute('home');
        }
-
     }
+
     /**
      * @Route("/consonne/list_breves", name="breves")
      */

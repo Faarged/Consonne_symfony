@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% block title %}
+Réservations
+{% endblock %}
+
+{% if app.user.isAdmin %}
+{% form_theme formResa 'bootstrap_4_layout.html.twig' %}
+{% endif %}
+
+{% block body %}
+  <div class="contenu col-xs-12 col-m-10">
+    <div class="titre">
+     <h1>Liste des réservations</h1>
+    </div>
+    <div class="perso">
+    {% if app.user.isAdmin == false %}
+      <table>
+        <caption>Mes dernières réservations</caption>
+        <tr>
+          <td>Date de réservation</td>
+          <td>Heure de début</td>
+          <td>Temps de réservation</td>
+          <td>Temps maximum</td>
+          <td>Matériel réservé</td>
+          <td>Jeu réservé</td>
+        </tr>
+        {% for resa in resas %}
+        <tr>
+          <td>{{ resa.createdAt | date('d/m/Y') }}</td>
+          <td>{{ resa.startAt | date('H:i') }}</td>
+          <td>{{ resa.duree | date('H:i') }}</td>
+          <td>{{ resa.user.gameTime | date('H:i') }}</td>
+          <td>{{ resa.materiel }}</td>
+          <td>{{ resa.game }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+    {% elseif app.user.isAdmin %}
+
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}
