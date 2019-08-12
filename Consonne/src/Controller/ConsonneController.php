@@ -127,14 +127,19 @@ class ConsonneController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
           $reservation->setCreatedAt(new \Datetime());
-          $reservation->setStartedAt(new \Datetime());
+          $reservation->setStartAt(new \Datetime());
           $manager->persist($reservation);
           $manager->flush();
           return $this->redirectToRoute('reservation');
         }
+        
+        $day = $reservation->getCreatedAt();
+        var_dump($day);
+        $liste = $repo->getByDay($day);
 
         return $this->render('consonne/reservation.html.twig', [
           'formResa' => $form->createView(),
+          'resas' => $liste
         ]);
 
       }else{

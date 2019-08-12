@@ -19,6 +19,12 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
+    public function getByDay($day){
+      return $this->createQueryBuilder('r')
+                  ->andWhere('r.createdAt = :jour')
+                  ->setParameter('jour', $day);
+    }
+
 
 
     /* public function resaAdminHome(){

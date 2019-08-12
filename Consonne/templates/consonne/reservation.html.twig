@@ -40,9 +40,40 @@ Réservations
         </tr>
       {% endfor %}
       </table>
+      </div>
+    </div>
     {% elseif app.user.isAdmin %}
-
-    {% endif %}
+    {{ form_start(formResa) }}
+    <div class="d-flex flex-column justify-content-center">
+      {{ form_row(formResa.user) }}
+      {{ form_row(formResa.duree) }}
+      {{ form_row(formResa.materiel) }}
+      {{ form_row(formResa.game) }}
+      <button type="submit" class="btn btn-success" name="button">
+      Enregistrer la réservation
+      </button>
+    </div>
+    {{ form_end(formResa) }}
+    <table>
+      <caption>Les réservations du jour</caption>
+      <tr>
+        <td>Auteur de la réservation</td>
+        <td>Heure de début</td>
+        <td>Temps de réservation</td>
+        <td>Matériel réservé</td>
+        <td>Jeu réservé</td>
+      </tr>
+      {% for resa in resas %}
+      <tr>
+        <td>{{ resa.user }}</td>
+        <td>{{ resa.startAt | date('H:i') }}</td>
+        <td>{{ resa.duree | date('H:i') }}</td>
+        <td>{{ resa.materiel }}</td>
+        <td>{{ resa.game }}</td>
+      </tr>
+    {% endfor %}
+    </table>
     </div>
   </div>
+    {% endif %}
 {% endblock %}
