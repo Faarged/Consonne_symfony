@@ -17,7 +17,7 @@ Réservations
     <div class="titre">
      <h1>Liste des réservations</h1>
     </div>
-    <div class="perso">
+    <div class="perso d-flex flex-column">
     {% if app.user.isAdmin == false %}
       <table>
         <caption>Mes dernières réservations</caption>
@@ -54,6 +54,7 @@ Réservations
       </button>
     </div>
     {{ form_end(formResa) }}
+    <div class ="d-flex justify-content-center mt-2">
     <table>
       <caption>Les réservations du jour</caption>
       <tr>
@@ -62,17 +63,24 @@ Réservations
         <td>Temps de réservation</td>
         <td>Matériel réservé</td>
         <td>Jeu réservé</td>
+        <td>Modification de la durée</td>
       </tr>
-      {% for resa in resas %}
+      {% for resa in resas  %}
+      {% if "now"|date('Y-m-d') == resa.createdAt|date('Y-m-d') and 'now'|date('H:i') >= resa.startAt|date('H:i') %}
+      {# ne marche pas:  and 'now'|date('H:i') <= resa.startAt|date_modify("+" ~resa.duree|date('H:i'))|date('H:i') #}
       <tr>
-        <td>{{ resa.user }}</td>
+        <td>{{ resa.user.pseudo }}</td>
         <td>{{ resa.startAt | date('H:i') }}</td>
         <td>{{ resa.duree | date('H:i') }}</td>
         <td>{{ resa.materiel }}</td>
         <td>{{ resa.game }}</td>
+        <td><a href="{{ path('edit_resa', {'id': resa.id}) }}"><i class="fas fa-cogs"></i></a></td>
       </tr>
+
+    {% endif %}
     {% endfor %}
     </table>
+    </div>
     </div>
   </div>
     {% endif %}

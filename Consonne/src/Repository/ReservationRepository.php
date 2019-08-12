@@ -19,19 +19,15 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function getByDay($day){
+    public function getByDay(){
       return $this->createQueryBuilder('r')
-                  ->andWhere('r.createdAt = :jour')
-                  ->setParameter('jour', $day);
+                  ->orderBy('r.startAt + r.duree', 'DESC')
+                  ->getQuery()
+                  ->getResult()
+                  ;
     }
 
 
-
-    /* public function resaAdminHome(){
-      $request = $this->createQueryBuilder('r')
-                      ->andWhere('r.createdAt = :days')
-                      setParameter('days', $)
-    }  */
 
     // /**
     //  * @return Reservation[] Returns an array of Reservation objects

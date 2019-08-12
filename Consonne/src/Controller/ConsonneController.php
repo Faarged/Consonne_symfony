@@ -23,6 +23,7 @@ use App\Repository\GameRepository;
 use App\Form\RegistrationType;
 use App\Form\BreveType;
 use App\Form\ReservationType;
+use App\Form\ResaType;
 use App\Form\MaterielType;
 use App\Form\GameType;
 use App\Form\UserType;
@@ -115,6 +116,26 @@ class ConsonneController extends AbstractController
     }
 
     /**
+    * @Route("/consonne/{id}/reservations", name="edit_resa")
+    */
+    public function editResa(Reservation $resa, Request $request, ObjectManager $manager){
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      $user = $this->getUser();
+      if($this->getUser()->getIsAdmin()){
+        $form = $this->createForm(ResaType::class, $resa);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+          $manager->persist($resa);
+          $manager->flush();
+          return $this->redirectToRoute('reservation');
+        }
+        return $this->render('consonne/edit_resa.html.twig', [
+          'formResa' => $form->createView(),
+        ]);
+      }
+    }
+
+    /**
     * @Route("/consonne/reservations", name="reservation")
     */
     public function createResa(ReservationRepository $repo, Request $request, ObjectManager $manager){
@@ -132,14 +153,11 @@ class ConsonneController extends AbstractController
           $manager->flush();
           return $this->redirectToRoute('reservation');
         }
-        
-        $day = $reservation->getCreatedAt();
-        var_dump($day);
-        $liste = $repo->getByDay($day);
+        $liste = $repo->getByDay();
 
         return $this->render('consonne/reservation.html.twig', [
           'formResa' => $form->createView(),
-          'resas' => $liste
+          'resas' => $liste,
         ]);
 
       }else{

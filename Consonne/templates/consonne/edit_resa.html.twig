@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/main.css">
+{% endblock %}
+
+{% block title %}
+Réservations
+{% endblock %}
+
+{% form_theme formResa 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+<div class="contenu col-xs-12 col-m-10">
+  <div class="titre">
+   <h1>Modifier la durée</h1>
+  </div>
+  <div class="perso d-flex flex-column">
+  {{ form_start(formResa) }}
+  <div class="d-flex flex-column justify-content-center">
+    {{ form_row(formResa.duree) }}
+    <button type="submit" class="btn btn-success" name="button">
+    Enregistrer la modification
+    </button>
+  </div>
+  {{ form_end(formResa) }}
+{% endblock %}
