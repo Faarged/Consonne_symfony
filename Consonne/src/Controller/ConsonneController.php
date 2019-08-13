@@ -117,6 +117,9 @@ class ConsonneController extends AbstractController
         return $this->render('consonne/edit_resa.html.twig', [
           'formResa' => $form->createView(),
         ]);
+      }else {
+        // il n'est pas admin
+        return $this->redirectToRoute('home');
       }
     }
 

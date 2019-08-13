@@ -15,7 +15,11 @@ Réservations
 {% block body %}
   <div class="contenu col-xs-12 col-m-10">
     <div class="titre">
-     <h1>Liste des réservations</h1>
+    {% if app.user.isAdmin == false %}
+      <h1>Liste des réservations</h1>
+    {% elseif app.user.isAdmin %}
+      <h1>Ajout de réservations</h1>
+    {% endif %}
     </div>
     <div class="perso d-flex flex-column">
     {% if app.user.isAdmin == false %}
