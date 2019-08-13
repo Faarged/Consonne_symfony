@@ -68,30 +68,15 @@ class ConsonneController extends AbstractController
           $cur_resa[$i++] = $value;
         }
       }
+
       //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
-      //NE MARCHE PAS
-      $endresa = $resa->findAll();
-      $reservations = [];
-      $i = 0;
-      foreach ($endresa as $resByDays) {
-        $date = $resByDays->getCreatedAt();
-        $start = $resByDays->getStartAt();
-        $duree = $resByDays->getDuree();
-        $interval = date_diff($date, $today);
-        $game_time = date_diff($start, $duree);
-        $inter = $start;
 
-        if ($interval->format('%R%a') > 0) {
-
-        }elseif($interval->format('%R%a') <= 0 && $game_time->format('%R%a') <= 0){
-          $reservations[$i++] = $resByDays;
-        }
-      }
+      $admin_resa = $resa->getByDay();
 
       return $this->render('consonne/home.html.twig', [
           'breve' => $liste,
           'resa' => $cur_resa,
-          'end' => $reservations,
+          'resas' => $admin_resa,
       ]);
     }
     /**

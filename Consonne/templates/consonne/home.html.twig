@@ -30,7 +30,8 @@
                       <td>Durée utilisée</td>
                       <td>Temps maximum</td>
                     </tr>
-                    {% for reservation in end %}
+                    {% for reservation in resas %}
+                    {% if "now"|date('Y-m-d') == reservation.createdAt|date('Y-m-d') and 'now'|date('H:i') >= reservation.startAt|date('H:i') %}
                     <tr>
                       <td>{{ reservation.user.name }}</td>
                       <td>{{ reservation.user.firstname }}</td>
@@ -39,6 +40,7 @@
                       <td>{{ reservation.duree | date('H:i') }}</td>
                       <td>{{ reservation.user.gameTime | date('H:i') }}</td>
                     </tr>
+                  {% endif %}
                   {% endfor %}
                   </table>
                 </div>
@@ -51,13 +53,18 @@
                     <tr>
                       <td>Heure de réservation</td>
                       <td>Temps utilisé</td>
+                      <td>Matériel</td>
+                      <td>Jeu</td>
                     </tr>
                     {% for reservation in resa %}
-
+                    {% if "now"|date('Y-m-d') == reservation.createdAt|date('Y-m-d') %}
                     <tr>
                       <td>{{ reservation.startAt | date('H:i') }}</td>
                       <td>{{ reservation.duree | date('H:i') }}</td>
+                      <td>{{ reservation.materiel }}</td>
+                      <td>{{ reservation.game }}</td>
                     </tr>
+                  {% endif %}
 
                   {% endfor %}
                   </table>
