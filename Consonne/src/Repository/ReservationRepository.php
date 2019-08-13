@@ -27,6 +27,36 @@ class ReservationRepository extends ServiceEntityRepository
                   ;
     }
 
+    public function getByDayLimited(){
+      return $this->createQueryBuilder('r')
+                  ->orderBy('r.startAt + r.duree', 'DESC')
+                  ->setMaxResults(5)
+                  ->getQuery()
+                  ->getResult()
+                  ;
+    }
+
+    public function getByUser($user){
+      return $this->createQueryBuilder('r')
+                  ->andWhere('r.user = :user')
+                  ->setParameter('user', $user)
+                  ->orderBy('r.startAt + r.duree', 'DESC')
+                  ->setMaxResults(10)
+                  ->getQuery()
+                  ->getResult()
+                  ;
+    }
+
+    public function getByUserLimited($user){
+      return $this->createQueryBuilder('r')
+                  ->andWhere('r.user = :user')
+                  ->setParameter('user', $user)
+                  ->setMaxResults(10)
+                  ->getQuery()
+                  ->getResult()
+                  ;
+    }
+
 
 
     // /**

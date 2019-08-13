@@ -33,7 +33,7 @@ Réservations
           <td>Matériel réservé</td>
           <td>Jeu réservé</td>
         </tr>
-        {% for resa in resas %}
+        {% for resa in resas | reverse %}
         <tr>
           <td>{{ resa.createdAt | date('d/m/Y') }}</td>
           <td>{{ resa.startAt | date('H:i') }}</td>

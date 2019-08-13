@@ -55,7 +55,7 @@ class ConsonneController extends AbstractController
       $liste = $repo->findLast();
 
       //pour adhérents: liste des réserv du jour
-      $res = $user->getReservations();
+      /*$res = $user->getReservations();
       $cur_resa = [];
       $i = 0;
       foreach ($res as $value) {
@@ -67,11 +67,12 @@ class ConsonneController extends AbstractController
         }else{
           $cur_resa[$i++] = $value;
         }
-      }
+      }*/
+      $cur_resa = $resa->getByUser($user);
 
       //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
 
-      $admin_resa = $resa->getByDay();
+      $admin_resa = $resa->getByDayLimited();
 
       return $this->render('consonne/home.html.twig', [
           'breve' => $liste,
@@ -149,7 +150,7 @@ class ConsonneController extends AbstractController
         ]);
 
       }else{
-        $liste = $repo->findByUser($user);
+        $liste = $repo->getByUserLimited($user);
 
         return $this->render('consonne/reservation.html.twig', [
           'resas' => $liste
