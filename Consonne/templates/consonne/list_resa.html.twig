@@ -26,7 +26,7 @@
                 <td>Jeu</td>
                 <td>Supprimer la réservation</td>
               </tr>
-              {% for resa in reservations %}
+              {% for resa in reservations | reverse %}
               <tr>
                 <td>{{ resa.user.pseudo }}</td>
                 <td>{{ resa.createdAt | date('d/m/y') }}</td>
