@@ -11,16 +11,19 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Users;
 use App\Entity\Breves;
 use App\Entity\Reservation;
+use App\Entity\Configuration;
 use App\Entity\Materiel;
 use App\Entity\Game;
 
 use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\ConfigurationRepository;
 use App\Repository\MaterielRepository;
 use App\Repository\GameRepository;
 
 use App\Form\RegistrationType;
+use App\Form\ConfigurationType;
 use App\Form\BreveType;
 use App\Form\ReservationType;
 use App\Form\ResaType;
@@ -102,6 +105,27 @@ class ConsonneController extends AbstractController
     }
 
     /**
+    * @Route("/consonne/{id}/configuration", name="edit_config")
+    */
+    public function editConfig(Configuration $config, Request $request, ObjectManager $manager){
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      if($this->getUser()->getIsAdmin()){
+        $form = $this->createForm(ConfigurationType::class, $config);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+          $manager->persist($config);
+          $manager->flush();
+          return $this->redirectToRoute('configuration');
+        }
+        return $this->render('consonne/edit_config.html.twig', [
+          'formConfig' => $form->createView(),
+        ]);
+      }else {
+        return $this->redirectToRoute('home');
+      }
+    }
+
+    /**
     * @Route("/consonne/{id}/reservations", name="edit_resa")
     */
     public function editResa(Reservation $resa, Request $request, ObjectManager $manager){
@@ -155,6 +179,23 @@ class ConsonneController extends AbstractController
         return $this->render('consonne/reservation.html.twig', [
           'resas' => $liste
         ]);
+      }
+    }
+
+    /**
+    * @Route("/consonne/configuration", name="configuration")
+    */
+    public function config(ConfigurationRepository $repo){
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      if($this->getUser()->getIsAdmin()){
+
+        $liste = $repo->findAll();
+
+        return $this->render('consonne/configuration.html.twig', [
+          'configs' => $liste
+        ]);
+      }else {
+        return $this->redirectToRoute('home');
       }
     }
 
