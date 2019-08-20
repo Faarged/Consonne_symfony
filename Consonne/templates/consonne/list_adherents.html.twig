@@ -43,7 +43,7 @@
                 <td>{{ users.endSubAt | date('d/m/Y') }}</td>
                 <td>{{ users.gameTime | date('H:i') }}</td>
                 <td><a href="{{ path('user_edit', {'id': users.id}) }}"><i class="fas fa-cogs"></i></a></td>
-                <td><a href="{{ path('user_delete', {'id': users.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a href="{{ path('user_delete', {'id': users.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet adhérent?')"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
               {% endfor %}
             </table>

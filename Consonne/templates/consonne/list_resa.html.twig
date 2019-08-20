@@ -34,7 +34,7 @@
                 <td>{{ resa.duree | date('H:i') }}</td>
                 <td>{{ resa.materiel }}</td>
                 <td>{{ resa.game }}</td>
-                <td><a href="{{ path('resa_delete', {'id': resa.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a href="{{ path('resa_delete', {'id': resa.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
               {% endfor %}
             </table>
