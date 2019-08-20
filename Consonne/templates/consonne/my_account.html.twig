@@ -84,11 +84,13 @@
                  <td><strong>PEGI</strong></td>
                  <td><strong>Support(s)</strong></td>
                </tr>
+               {% for game in games %}
                <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                <td>{{ game.title }}</td>
+                <td>{{ game.pegi }}</td>
+                <td>{% for materiel in game.support %}{{ materiel.name }} {% endfor %}</td>
                </tr>
+             {% endfor %}
              </table>
            </div>
          {% endif %}

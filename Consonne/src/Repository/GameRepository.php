@@ -19,6 +19,16 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
+    public function getByPegi($pegi){
+        return $this->createQueryBuilder('g')
+                    ->andWhere('g.pegi <= :pegi')
+                    ->setParameter('pegi', $pegi)
+                    //->andWhere
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Game[] Returns an array of Game objects
     //  */

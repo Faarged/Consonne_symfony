@@ -86,9 +86,14 @@ class ConsonneController extends AbstractController
     /**
     * @Route("/consonne/my_account", name="account")
     */
-    public function changePass(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+    public function changePass(GameRepository $repo, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      //je récupère l'utilisateur
       $user = $this->getUser();
+      //je vais chercher son pegi pour chercher les jeux ayant le meme pegi ou moins
+      $pegi = $user->getPegi($user);
+      $liste = $repo->getByPegi($pegi);
+      //je prépare l'affichage du formulaire en précisant lequel utiliser
       $form = $this->createForm(UserType::class, $user);
       $form->handleRequest($request);
 
@@ -101,6 +106,7 @@ class ConsonneController extends AbstractController
       }
       return $this->render('consonne/my_account.html.twig', [
         'formUser' => $form->createView(),
+        'games' => $liste,
       ]);
     }
 

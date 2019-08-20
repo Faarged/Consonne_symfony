@@ -16,15 +16,12 @@ Merci d'utiliser COSP et de faire vivre ce programme !
 */
 /*////////////////////////// 1) intro ////////////////////////////////////*/
 html {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
 }
 
 body {
   background-color: white;
-  margin: 0px;
   display: flex;
   flex-direction: column;
   font-size: 1em;
@@ -38,22 +35,17 @@ body {
 
 a {
   text-decoration: none;
-  color: red
 }
 
 hr {
   background-color: black;
   color: black;
   border: black solid 1px;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: red
+  width:100%;
 }
 
 h1 {
-  color: #B3826F;
+  color: #5DB3A4;
 }
 
 html, body {
@@ -62,9 +54,6 @@ html, body {
   margin: 0;
 }
 
-hr{
-
-}
 /*////////////////////////// Fin de l'intro ////////////////////////////////////*/
 
 /*////////////////////////// 2) header ////////////////////////////////////*/
@@ -75,6 +64,9 @@ header > p {
   font-size: 2em;
   padding-top: 0.3em;
   padding-left: 0.3em;
+}
+.head > p{
+  color: #5DB3A4;
 }
 
 .head {
@@ -113,7 +105,11 @@ header > p {
 
 /* style des liens en hover */
 .nav > a:hover{
-  color: red;
+  color: blue;
+  text-decoration: underline;
+}
+.navadmin > nav > ul > li > a:hover{
+  color: blue;
   text-decoration: underline;
 }
 /* fin du style avec hover */
@@ -134,10 +130,19 @@ nav {
   box-shadow: 2px 2px 5px #B3826F;
   padding: 0.5em;
 }
+.navadmin > nav > h3{
+  color: #5DB3A4;
+}
+.navadmin > nav > ul > li > a{
+  color: black;
+  text-decoration: none;
+}
 /* fin de la navadmin */
 
 /*////////////////////////// fin header ////////////////////////////////////*/
-
+.titre{
+  color: #B3826F;
+}
 .contenu{
   padding-left: 1em;
   padding-right: 0.5em;
@@ -273,5 +278,5 @@ footer {
 }
 @media screen and (max-width:640px){
 
-  
+
 }
