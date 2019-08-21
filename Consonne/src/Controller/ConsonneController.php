@@ -78,6 +78,18 @@ class ConsonneController extends AbstractController
         $manager->flush();
       }
 
+      //suppression résa de + de 4mois
+      $oldresas = $resa->findAll();
+      foreach($oldresas as $old){
+        $create = $old->getCreatedAt();
+        $res = $today->diff($create);
+        $oldres = $res->format('%m');
+        if($oldres > 4){
+          $manager->remove($old);
+          $manager->flush();
+        }
+      }
+
       //dernière brèves créée
       $liste = $repo->findLast();
 
