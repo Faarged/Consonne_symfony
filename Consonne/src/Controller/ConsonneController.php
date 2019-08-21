@@ -48,33 +48,43 @@ class ConsonneController extends AbstractController
     /**
     *  @Route("/consonne/home", name="home")
     */
-    public function home(BrevesRepository $repo, ReservationRepository $resa, UsersRepository $users){
-
+    public function home(BrevesRepository $repo, ObjectManager $manager, ReservationRepository $resa, UsersRepository $repuser){
+      //bloque l'accès a la page si pas d'user connecté
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       $user= $this->getUser();
+
+      //recalcul des ages et pegis
       $today = new \DateTime();
+      $adherents = $repuser->findAll();
+      foreach($adherents as $a){
+        $naissance = $a->getBirthdate();
+        $age_date = $today->diff($naissance);
+        $age = $age_date->format('%y');
+        //ajout du pegi
+        if ($age < 7) {
+          $a->setPegi(3);
+        }elseif ($age >= 7 && $age< 9) {
+          $a->setPegi(7);
+        }elseif ($age >= 9 && $age < 12) {
+          $a->setPegi(9);
+        }elseif ($age >= 12 && $age < 16) {
+          $a->setPegi(12);
+        }elseif ($age >= 16 && $age < 18) {
+          $a->setPegi(16);
+        }else {
+          $a->setPegi(18);
+        }
+        $manager->persist($a);
+        $manager->flush();
+      }
 
       //dernière brèves créée
       $liste = $repo->findLast();
 
       //pour adhérents: liste des réserv du jour
-      /*$res = $user->getReservations();
-      $cur_resa = [];
-      $i = 0;
-      foreach ($res as $value) {
-        $date = $value->getCreatedAt();
-        $interval = date_diff($date, $today);
-
-        if ($interval->format('%R%a') > 0) {
-
-        }else{
-          $cur_resa[$i++] = $value;
-        }
-      }*/
       $cur_resa = $resa->getByUser($user);
 
       //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
-
       $admin_resa = $resa->getByDayLimited();
 
       return $this->render('consonne/home.html.twig', [
