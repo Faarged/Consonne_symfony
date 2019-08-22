@@ -98,6 +98,7 @@ class ConsonneController extends AbstractController
 
       //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
       $admin_resa = $resa->getByDayLimited();
+      dump($admin_resa);
 
       return $this->render('consonne/home.html.twig', [
           'breve' => $liste,

@@ -21,6 +21,7 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function getByDay(){
       return $this->createQueryBuilder('r')
+                  ->andWhere("DATE_DIFF(CURRENT_DATE(), r.createdAt) = 0")
                   ->orderBy('r.startAt + r.duree', 'DESC')
                   ->getQuery()
                   ->getResult()
@@ -29,6 +30,7 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function getByDayLimited(){
       return $this->createQueryBuilder('r')
+                  ->andWhere("DATE_DIFF(CURRENT_DATE(), r.createdAt) = 0")
                   ->orderBy('r.startAt + r.duree', 'DESC')
                   ->setMaxResults(5)
                   ->getQuery()
@@ -40,6 +42,7 @@ class ReservationRepository extends ServiceEntityRepository
       return $this->createQueryBuilder('r')
                   ->andWhere('r.user = :user')
                   ->setParameter('user', $user)
+                  ->andWhere("DATE_DIFF(CURRENT_DATE(), r.createdAt) = 0")
                   ->orderBy('r.startAt + r.duree', 'DESC')
                   ->setMaxResults(10)
                   ->getQuery()
