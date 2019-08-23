@@ -1,12 +1,11 @@
-var Chart = require('chart.js');
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     // The type of chart we want to create
-    type = 'pie',
+    type: 'pie',
 
     // The data for our dataset
-    data = {
+    data: {
     datasets: [{
         data: [10, 20, 30]
     }],
@@ -20,6 +19,6 @@ var myChart = new Chart(ctx, {
 },
 
     // Configuration options go here
-    options = {}
+    options: {}
 }
 );
