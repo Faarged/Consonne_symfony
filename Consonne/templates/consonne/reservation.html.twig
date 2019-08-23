@@ -49,7 +49,7 @@ Réservations
     {% elseif app.user.isAdmin %}
     {{ form_start(formResa) }}
     <div class="d-flex flex-column justify-content-center">
-      {{ form_row(formResa.user) }}
+      {{ form_row(formResa.user, {'attr':{'class':'d-flex flex-row row-wrap'}}) }}
       {{ form_row(formResa.duree) }}
       {{ form_row(formResa.materiel) }}
       {{ form_row(formResa.game) }}
@@ -67,6 +67,7 @@ Réservations
         <td>Temps de réservation</td>
         <td>Matériel réservé</td>
         <td>Jeu réservé</td>
+        <td>Temps de jeu autorisé</td>
         <td>Modification de la durée</td>
       </tr>
       {% for resa in resas  %}
@@ -78,6 +79,7 @@ Réservations
         <td>{{ resa.duree | date('H:i') }}</td>
         <td>{{ resa.materiel }}</td>
         <td>{{ resa.game }}</td>
+        <td>{{ resa.user.gameTime | date('H:i') }}</td>
         <td><a href="{{ path('edit_resa', {'id': resa.id}) }}"><i class="fas fa-cogs"></i></a></td>
       </tr>
 

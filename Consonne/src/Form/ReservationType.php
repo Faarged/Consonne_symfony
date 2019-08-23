@@ -42,6 +42,7 @@ class ReservationType extends AbstractType
                 'choice_label'  => 'pseudo',
                 'label'         => 'Auteur de la réservation:',
                 'placeholder'   => 'Pseudo',
+                'expanded'      => true,
 
               ])
         ;

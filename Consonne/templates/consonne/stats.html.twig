@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/Chart.min.css">
+{% endblock %}
+
+{% block title %}
+Statistiques
+{% endblock %}
+
+{% block body %}
+<div class="contenu col-10">
+  <div class="titre">
+   <h1>Statistiques</h1>
+  </div>
+  <div class="perso">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="/js/Chart.min.js"></script>
+<script src="/js/stats.js"></script>
+{% endblock %}

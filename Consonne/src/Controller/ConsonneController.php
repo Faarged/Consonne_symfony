@@ -400,7 +400,6 @@ class ConsonneController extends AbstractController
               'adherents' => $liste,
           ]);
        } else {
-         // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
          return $this->redirectToRoute('home');
        }
 
@@ -420,7 +419,6 @@ class ConsonneController extends AbstractController
                'admins' => $liste,
            ]);
         } else {
-          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
           return $this->redirectToRoute('home');
         }
 
@@ -440,7 +438,6 @@ class ConsonneController extends AbstractController
               'reservations' => $liste,
           ]);
        } else {
-         // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
          return $this->redirectToRoute('home');
        }
     }
@@ -460,10 +457,8 @@ class ConsonneController extends AbstractController
                'breves' => $liste,
            ]);
         } else {
-          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
           return $this->redirectToRoute('home');
         }
-
     }
 
     /**
@@ -481,10 +476,8 @@ class ConsonneController extends AbstractController
                'materiels' => $liste,
            ]);
         } else {
-          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
           return $this->redirectToRoute('home');
         }
-
     }
     /**
      * @Route("/consonne/list_games", name="games")
@@ -501,10 +494,28 @@ class ConsonneController extends AbstractController
                'games' => $liste,
            ]);
         } else {
-          // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
           return $this->redirectToRoute('home');
         }
+    }
 
+    /**
+     * @Route("/consonne/statistiques", name="stats")
+     */
+    public function stats(ReservationRepository $repo, UsersRepository $adher)
+    {
+       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+       if($this->getUser()->getIsAdmin()){
+        $liste = $repo->findAll();
+        $users = $adher->findAll();
+
+          return $this->render('consonne/stats.html.twig', [
+              'reservations' => $liste,
+              'users' => $users,
+          ]);
+       } else {
+         return $this->redirectToRoute('home');
+       }
     }
 
     /**
