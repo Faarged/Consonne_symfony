@@ -256,6 +256,14 @@ select {
   margin-top: 0.5em;
   padding: 0.5em;
 }
+
+.graf{
+  display: flex;
+  border: solid 1px #5DB3A4;
+  box-shadow: 2px 2px 5px #B3826F;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
 /*////////////////////////// X) Footer ////////////////////////////////////*/
 footer {
   margin-top: auto;

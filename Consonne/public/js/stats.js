@@ -2,12 +2,17 @@
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'pie',
+    type: 'doughnut',
 
     // The data for our dataset
     data: {
     datasets: [{
-        data: [10, 20, 30]
+        data: [10, 20, 30],
+        backgroundColor: [
+          'red',
+          'yellow',
+          'blue'
+        ]
     }],
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
