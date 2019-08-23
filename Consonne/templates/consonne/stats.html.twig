@@ -17,6 +17,12 @@ Statistiques
   <div class="row d-flex flex-row row-wrap justify-content-around">
   <div class="graf col-5 d-flex flex-column">
     <h2 class="text-center">Statistique</h2>
+    <div class="pegi3" data-pegi3="{{ pegi3 | length }}"></div>
+    <div class="pegi7" data-pegi7="{{ pegi7 | length }}"></div>
+    <div class="pegi9" data-pegi9="{{ pegi9 | length }}"></div>
+    <div class="pegi12" data-pegi12="{{ pegi12 | length }}"></div>
+    <div class="pegi16" data-pegi16="{{ pegi16 | length }}"></div>
+    <div class="pegi18" data-pegi18="{{ pegi18 | length }}"></div>
     <canvas id="myChart" max-width="200" height="200"></canvas>
   </div>
   <div class="graf col-5 d-flex flex-column">

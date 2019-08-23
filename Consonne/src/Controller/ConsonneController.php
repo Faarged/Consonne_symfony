@@ -507,11 +507,21 @@ class ConsonneController extends AbstractController
 
        if($this->getUser()->getIsAdmin()){
         $liste = $repo->findAll();
-        $users = $adher->findAll();
+        $pegi3 = $adher->findByPegi(3);
+        $pegi7 = $adher->findByPegi(7);
+        $pegi9 = $adher->findByPegi(9);
+        $pegi12 = $adher->findByPegi(12);
+        $pegi16 = $adher->findByPegi(16);
+        $pegi18 = $adher->findByPegi(18);
 
           return $this->render('consonne/stats.html.twig', [
               'reservations' => $liste,
-              'users' => $users,
+              'pegi3' => $pegi3,
+              'pegi7' => $pegi7,
+              'pegi9' => $pegi9,
+              'pegi12' => $pegi12,
+              'pegi16' => $pegi16,
+              'pegi18' => $pegi18,
           ]);
        } else {
          return $this->redirectToRoute('home');
