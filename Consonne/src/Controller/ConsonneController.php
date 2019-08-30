@@ -12,6 +12,7 @@ use App\Entity\Users;
 use App\Entity\Breves;
 use App\Entity\Reservation;
 use App\Entity\Configuration;
+use App\Entity\ResaStat;
 use App\Entity\Materiel;
 use App\Entity\Game;
 
@@ -19,6 +20,7 @@ use App\Repository\UsersRepository;
 use App\Repository\BrevesRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\ConfigurationRepository;
+use App\Repository\ResaStatRepository;
 use App\Repository\MaterielRepository;
 use App\Repository\GameRepository;
 

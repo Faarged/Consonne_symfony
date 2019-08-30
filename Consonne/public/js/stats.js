@@ -27,7 +27,7 @@ var myChart = new Chart(ctx, {
           'red',
           'yellow',
           'blue',
-          'brown',
+          'green',
           'orange',
           'violet'
         ]
@@ -41,36 +41,6 @@ var myChart = new Chart(ctx, {
         '12-15ans',
         '16-17ans',
         '+18ans'
-    ]
-},
-
-    // Configuration options go here
-    options: {}
-}
-);
-
-
-var sta = document.getElementById('canvas').getContext('2d');
-var chart = new Chart(sta, {
-    // The type of chart we want to create
-    type: 'doughnut',
-
-    // The data for our dataset
-    data: {
-    datasets: [{
-        data: [10, 20, 30],
-        backgroundColor: [
-          'pink',
-          'brown',
-          'orange'
-        ]
-    }],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-        'pink',
-        'brown',
-        'orange'
     ]
 },
 
