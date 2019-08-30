@@ -182,7 +182,7 @@ class ConsonneController extends AbstractController
     /**
     * @Route("/consonne/reservations", name="reservation")
     */
-    public function createResa(ReservationRepository $repo, Request $request, ObjectManager $manager){
+    public function createResa(ResaStat $stats = null, ResaStatRepository $stat, ReservationRepository $repo, Request $request, ObjectManager $manager){
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       $user = $this->getUser();
       if($this->getUser()->getIsAdmin()){
@@ -195,6 +195,20 @@ class ConsonneController extends AbstractController
           $reservation->setStartAt(new \Datetime());
           $manager->persist($reservation);
           $manager->flush();
+          //ajout table des stats
+          $verif = $stat->findByDate(new \Datetime());
+          if(empty($verif)){
+            $stats = new ResaStat();
+            $stats->setDate(new \Datetime());
+            $stats->setResNumber(1);
+            $manager->persist($stats);
+            $manager->flush();
+          }else {
+            $nbres = $stats->getResNumber();
+            $verif->setResNumber($nbres+1);
+            $manager->persist($verif);
+            $manager->flush();
+          }
           return $this->redirectToRoute('reservation');
         }
         $liste = $repo->getByDay();
