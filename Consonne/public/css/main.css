@@ -264,6 +264,10 @@ select {
   margin-top: 0.5em;
   padding: 0.5em;
 }
+
+#canvas{
+  min-width: 300px !important;
+}
 /*////////////////////////// X) Footer ////////////////////////////////////*/
 footer {
   margin-top: auto;

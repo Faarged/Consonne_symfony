@@ -28,7 +28,7 @@ Statistiques
 
   <div class="graf col-5 d-flex flex-column">
     <h2 class="text-center">Statistique 2</h2>
-    <canvas id="canvas" max-width="200" height="200"></canvas>
+    <canvas id="canvas" ></canvas>
   </div>
   </div>
 
@@ -42,31 +42,21 @@ Statistiques
 <script src="/js/Chart.min.js"></script>
 <script src="/js/stats.js"></script>
 <script type="text/javascript">
-/*
-
-id date resa
-1  01/09/19  2
-2  02/09/19  14
-3  05/09/19  8
-
-02/09/19 -> check la date, si ok tu prends cette date, si non tu l'as créée
-A chaque reservation créée , tu incrémentes la reservation
-*/
 var ctx = document.getElementById("canvas").getContext('2d');
         var Chart = new Chart(ctx, {
           type: 'line',
           data: {
-              labels:[],
+              labels:[{% for stat in stats %}'{{ stat.date | date('d/m/Y') }}',{% endfor %}],
               datasets:[{
-                  label: 'Nombre de personnes',
-                  data: [],
+                  label: 'Nombre de réservations',
+                  data: [{% for sta in stats %}{{sta.resNumber}},{% endfor %}],
                   backgroundColor: 'transparent',
                   borderColor: "#3cba9f",
                 },
               ]},
           options: {title: {
             display: true,
-            text: 'Evolution des pratiques dun metier en fonction du temps'
+            text: 'Evolution des réservations en fonction de la date'
           }}
         });
 </script>

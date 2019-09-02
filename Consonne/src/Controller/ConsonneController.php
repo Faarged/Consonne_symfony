@@ -518,7 +518,7 @@ class ConsonneController extends AbstractController
     /**
      * @Route("/consonne/statistiques", name="stats")
      */
-    public function stats(ReservationRepository $repo, UsersRepository $adher)
+    public function stats(ReservationRepository $repo, UsersRepository $adher, ResaStatRepository $stats)
     {
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -530,6 +530,7 @@ class ConsonneController extends AbstractController
         $pegi12 = $adher->findByPegi(12);
         $pegi16 = $adher->findByPegi(16);
         $pegi18 = $adher->findByPegi(18);
+        $allstats = $stats->findAll();
 
           return $this->render('consonne/stats.html.twig', [
               'reservations' => $liste,
@@ -539,6 +540,7 @@ class ConsonneController extends AbstractController
               'pegi12' => $pegi12,
               'pegi16' => $pegi16,
               'pegi18' => $pegi18,
+              'stats' => $allstats,
           ]);
        } else {
          return $this->redirectToRoute('home');
