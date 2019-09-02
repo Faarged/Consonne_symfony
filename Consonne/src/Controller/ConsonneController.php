@@ -196,7 +196,7 @@ class ConsonneController extends AbstractController
           $manager->persist($reservation);
           $manager->flush();
           //ajout table des stats
-          $verif = $stat->findByDate(new \Datetime());
+          $verif = $stat->findOneByDate(new \Datetime());
           if(empty($verif)){
             $stats = new ResaStat();
             $stats->setDate(new \Datetime());
@@ -204,13 +204,14 @@ class ConsonneController extends AbstractController
             $manager->persist($stats);
             $manager->flush();
           }else {
-            $nbres = $stats->getResNumber();
+            $nbres = $verif->getResNumber();
             $verif->setResNumber($nbres+1);
             $manager->persist($verif);
             $manager->flush();
           }
           return $this->redirectToRoute('reservation');
         }
+
         $liste = $repo->getByDay();
 
         return $this->render('consonne/reservation.html.twig', [
