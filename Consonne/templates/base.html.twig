@@ -17,25 +17,28 @@
           <img src="/img/logo.png" width="50%" alt="Logo de Ardenne Metropole">
           </div>
           </div>
-          <hr>
-          <div class="navbar d-flex nav w-100 justify-content-around">
+          <div class="barre">
+            <hr>
+            <div class="navbar d-flex nav w-100 justify-content-around">
 
-              <a href="{{ path('home') }}">Accueil</a> -
-              <a href="{{ path('account') }}">Mon compte</a> -
-              <a href="{{ path('reservation') }}">Mes réservations</a> -
-              <a href="{{ path('logout') }}">
-                <i class="fas fa-sign-out-alt">Déconnecter {{ app.user.pseudo}}</i>
-              </a>
+                <a href="{{ path('home') }}">Accueil</a> -
+                <a href="{{ path('account') }}">Mon compte</a> -
+                <a href="{{ path('reservation') }}">Mes réservations</a> -
+                <a href="{{ path('logout') }}">
+                  <i class="fas fa-sign-out-alt">Déconnecter {{ app.user.pseudo}}</i>
+                </a>
 
+            </div>
+            <hr>
           </div>
-          <hr>
+
         </header>
 
         {% if app.user.isAdmin %}
         <div class="row corps d-flex justify-content-center">
 
-          <div class="navadmin col-xs-12 col-s-2 col-m-2">
-            <nav>
+          <div class="navadmin ">
+            <nav class="d-flex flex-column justify-content-between">
 
               <h3>Administration</h3>
               <ul>
@@ -56,7 +59,7 @@
 
         {% if app.user %}
         <footer class="d-flex flex-column w-100 text-dark">
-          <div class="col-12 ">
+          <div class="col-12">
             <hr>
           </div>
           <div class="col-12 text-center">

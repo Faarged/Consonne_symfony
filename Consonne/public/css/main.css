@@ -60,6 +60,7 @@ html, body {
 /* section déstiné à l'header et le panel de navigation admin du coté */
 
 /* titre du header */
+
 header > p {
   font-size: 2em;
   padding-top: 0.3em;
@@ -90,6 +91,9 @@ header > p {
 /* fin du CSS pour le titre du header */
 
 /* barre de navigation du header */
+.barre{
+  background: #FFDED1;
+}
 .navbar{
   display: flex;
   flex-flow: row wrap;
@@ -129,9 +133,10 @@ nav {
   border: solid 1px #5DB3A4;
   box-shadow: 2px 2px 5px #B3826F;
   padding: 0.5em;
+  background: #B8FFF3;
 }
 .navadmin > nav > h3{
-  color: #5DB3A4;
+  color: #B3826F;
 }
 .navadmin > nav > ul > li > a{
   color: black;
@@ -142,6 +147,9 @@ nav {
 /*////////////////////////// fin header ////////////////////////////////////*/
 .titre{
   color: #B3826F;
+}
+.corps{
+  margin-bottom: 1em;
 }
 .contenu{
   padding-left: 1em;
@@ -203,6 +211,7 @@ select {
   box-shadow: 2px 2px 5px #B3826F;
   padding: 0.5em;
   margin-top: 0.5em;
+  background: #FFDED1;
 }
 
 #breve_accueil{
@@ -212,6 +221,7 @@ select {
   box-shadow: 2px 2px 5px #B3826F;
   padding: 0.5em;
   margin-top: 0.5em;
+  background:#B3826F;
 }
 
 .titre{
@@ -219,6 +229,7 @@ select {
   box-shadow: 2px 2px 5px #B3826F;
   margin-bottom: 0.5em;
   padding-left: 0.5em;
+  background: #FFDED1;
 }
 
 #sous-titre{
@@ -231,8 +242,12 @@ select {
   box-shadow: 2px 2px 5px #B3826F;
   margin-top: 0.5em;
   padding: 0.5em;
-}
+  background: #5DB3A4;
 
+}
+table > caption{
+  color: white;
+}
 .perso > table{
   width: 100%;
 }
@@ -246,6 +261,8 @@ select {
   margin-top: 0.5em;
   padding: 0.5em;
   width: 50%;
+  background: #5DB3A4;
+
 }
 
 .info{
@@ -265,12 +282,17 @@ select {
   padding: 0.5em;
 }
 
-#canvas{
-  min-width: 300px !important;
+canvas{
+  width: auto;
+  height: auto;
 }
 /*////////////////////////// X) Footer ////////////////////////////////////*/
 footer {
   margin-top: auto;
+  background: #B8FFF3;
+}
+footer > div {
+  background: #B8FFF3;
 }
 /*////////////////////////// Fin du footer ////////////////////////////////////*/
 @media screen and (max-width:640px){
