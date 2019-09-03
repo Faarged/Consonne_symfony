@@ -12,6 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class ReservationType extends AbstractType
 {
@@ -20,7 +21,13 @@ class ReservationType extends AbstractType
         $builder
             //->add('createdAt')
             //->add('startAt')
-            ->add('duree')
+            ->add('duree', TimeType::class, [
+              'hours' => [00, 01, 02],
+              'placeholder' => [
+                  'hour' => 'Heure', 'minute' => 'Minute'
+              ],
+
+            ])
             ->add('materiel', EntityType::class, [
                 'class'         => Materiel::class,
                 'choice_label'  => 'name',
