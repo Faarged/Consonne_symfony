@@ -286,6 +286,9 @@ canvas{
   width: auto;
   height: auto;
 }
+td{
+  padding: 0.5em;
+}
 /*////////////////////////// X) Footer ////////////////////////////////////*/
 footer {
   margin-top: auto;
