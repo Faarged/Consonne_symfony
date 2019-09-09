@@ -12,10 +12,10 @@ Création de matériel
 
 {% block body %}
   <div class="contenu">
-    <div class="titre">
+    <div class="titre animated fadeInRight">
       <h1>Création de matériel</h1>
     </div>
-    <div class="perso">
+    <div class="perso animated fadeInUp">
           {{ form_start(formMateriel) }}
           {{ form_row(formMateriel.name, {'label': 'Nom du matériel', 'attr':{'placeholder':"Nom du matériel"}}) }}
           {{ form_row(formMateriel.type, {'label': 'Type de matériel'}) }}

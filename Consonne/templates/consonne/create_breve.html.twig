@@ -12,10 +12,10 @@ Création de brève
 
 {% block body %}
   <div class="contenu">
-    <div class="titre">
+    <div class="titre animated fadeInRight">
       <h1>Création de brève</h1>
     </div>
-    <div class="perso">
+    <div class="perso animated fadeInUp">
           {{ form_start(formBreve) }}
           {{ form_row(formBreve.title, {'label': 'Titre', 'attr':{'placeholder':"Titre"}}) }}
           {{ form_row(formBreve.content, {'label': 'Contenu', 'attr':{'placeholder':"Contenu"}}) }}
