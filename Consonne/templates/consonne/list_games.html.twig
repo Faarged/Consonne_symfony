@@ -22,12 +22,14 @@ Liste des jeux
       <tr>
         <td>Titre</td>
         <td>Pegi</td>
+        <td>Support</td>
         <td>Supprimer le jeu</td>
       </tr>
       {% for game in games %}
       <tr>
         <td>{{ game.title }}</td>
         <td>{{ game.pegi }}</td>
+      <td>{% for materiel in game.support %}{{ materiel.name }} | {% endfor %}</td>
         <td><a href="{{ path('game_delete', {'id': game.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
       </tr>
       {% endfor %}

@@ -43,35 +43,35 @@ Statistiques
 <script src="/js/stats.js"></script>
 <script type="text/javascript">
 var ctx = document.getElementById("canvas").getContext('2d');
-        var Chart = new Chart(ctx, {
-          type: 'line',
-          data: {
-              labels:[{% for stat in stats %}'{{ stat.date | date('d/m') }}',{% endfor %}],
-              datasets:[{
-                  label: 'Nombre de réservations',
-                  data: [{% for sta in stats %}{{sta.resNumber}},{% endfor %}],
-                  backgroundColor: 'transparent',
-                  borderColor: "#3cba9f",
-                },
-              ]},
-          options: {
-            title: {
-              display: true,
-              text: 'Evolution des réservations en fonction de la date'
+  var Chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels:[{% for stat in stats %}'{{ stat.date | date('d/m') }}',{% endfor %}],
+        datasets:[{
+            label: 'Nombre de réservations',
+            data: [{% for sta in stats %}{{sta.resNumber}},{% endfor %}],
+            backgroundColor: 'transparent',
+            borderColor: "#3cba9f",
           },
-          elements: {
-            line: {
-                tension: 0 // désactive la courbe et rend l'affichage linéaire
-            }
-        },
-        animation: {
-            duration: 0 // désactive l'animation d'apparition pour vitesse d'affichage
-        },
-        hover: {
-            animationDuration: 0 // retire animation du hover
-        },
-        responsiveAnimationDuration: 0 // retire animation de remise en taille normale
-        }
-        });
+        ]},
+    options: {
+      title: {
+        display: true,
+        text: 'Evolution des réservations en fonction de la date'
+    },
+    elements: {
+      line: {
+          tension: 0 // désactive la courbe et rend l'affichage linéaire
+      }
+    },
+    animation: {
+        duration: 0 // désactive l'animation d'apparition pour vitesse d'affichage
+    },
+    hover: {
+        animationDuration: 0 // retire animation du hover
+    },
+    responsiveAnimationDuration: 0 // retire animation de remise en taille normale
+    }
+  });
 </script>
 {% endblock %}

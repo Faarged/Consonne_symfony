@@ -16,23 +16,21 @@ var ctx = document.getElementById('myChart').getContext('2d');
     var adult = p18.dataset.pegi18;
 
 var myChart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'doughnut',
-
-    // The data for our dataset
-    data: {
+  // The type of chart we want to create
+  type: 'doughnut',
+  // The data for our dataset
+  data: {
     datasets: [{
-        data: [youngage, young, youngteen, teen, teenager, adult],
-        backgroundColor: [
-          'red',
-          'yellow',
-          'blue',
-          'green',
-          'orange',
-          'violet'
-        ]
+      data: [youngage, young, youngteen, teen, teenager, adult],
+      backgroundColor: [
+        'red',
+        'yellow',
+        'blue',
+        'green',
+        'orange',
+        'violet'
+      ]
     }],
-
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
         '-6ans',
@@ -42,9 +40,7 @@ var myChart = new Chart(ctx, {
         '16-17ans',
         '+18ans'
     ]
-},
-
-    // Configuration options go here
-    options: {}
-}
-);
+  },
+  // Configuration options go here
+  options: {}
+});
