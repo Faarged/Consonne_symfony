@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+//call my entity, Repository and form to use them
 use App\Entity\Users;
 use App\Entity\Breves;
 use App\Entity\Reservation;
@@ -51,18 +51,18 @@ class ConsonneController extends AbstractController
     *  @Route("/consonne/home", name="home")
     */
     public function home(BrevesRepository $repo, ObjectManager $manager, ReservationRepository $resa, UsersRepository $repuser){
-      //bloque l'accès a la page si pas d'user connecté
+      //stop access if no user connected
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       $user= $this->getUser();
 
-      //recalcul des ages et pegis
+      //calcul ages and pegis
       $today = new \DateTime();
       $adherents = $repuser->findAll();
       foreach($adherents as $a){
         $naissance = $a->getBirthdate();
         $age_date = $today->diff($naissance);
         $age = $age_date->format('%y');
-        //ajout du pegi
+        //add the pegi
         if ($age < 7) {
           $a->setPegi(3);
         }elseif ($age >= 7 && $age< 9) {
@@ -80,7 +80,7 @@ class ConsonneController extends AbstractController
         $manager->flush();
       }
 
-      //suppression résa de + de 4mois
+      //delete reservation 4 months old
       $oldresas = $resa->findAll();
       foreach($oldresas as $old){
         $create = $old->getCreatedAt();
@@ -92,13 +92,13 @@ class ConsonneController extends AbstractController
         }
       }
 
-      //dernière brèves créée
+      //search last breve created
       $liste = $repo->findLast();
 
-      //pour adhérents: liste des réserv du jour
+      //for user "adherent": list his reservation of the current day
       $cur_resa = $resa->getByUser($user);
 
-      //pour admins: liste des réserv dont l'heure de début + durée sont plus proche de heure actuelle
+      //for user "admins": list reservations which startTime + last will nearly end
       $admin_resa = $resa->getByDayLimited();
       //dump($admin_resa);
 
@@ -113,20 +113,22 @@ class ConsonneController extends AbstractController
     */
     public function changePass(GameRepository $repo, Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-      //je récupère l'utilisateur
+      //find the user
       $user = $this->getUser();
-      //je vais chercher son pegi pour chercher les jeux ayant le meme pegi ou moins
+      //Find his pegi to list the game he can play
       $pegi = $user->getPegi($user);
       $liste = $repo->getByPegi($pegi);
-      //je prépare l'affichage du formulaire en précisant lequel utiliser
+      //prepare the form to use
       $form = $this->createForm(UserType::class, $user);
       $form->handleRequest($request);
 
       if($form->isSubmitted() && $form->isValid()){
+        //hash the password
         $hash = $encoder->encodePassword($user, $user->getPassword());
         $user->setPassword($hash);
         $manager->persist($user);
         $manager->flush();
+        //redirection after adding to db
         return $this->redirectToRoute('account');
       }
       return $this->render('consonne/my_account.html.twig', [
@@ -140,6 +142,7 @@ class ConsonneController extends AbstractController
     */
     public function editConfig(Configuration $config, Request $request, ObjectManager $manager){
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      //only admin have access to this:
       if($this->getUser()->getIsAdmin()){
         $form = $this->createForm(ConfigurationType::class, $config);
         $form->handleRequest($request);
@@ -174,7 +177,7 @@ class ConsonneController extends AbstractController
           'formResa' => $form->createView(),
         ]);
       }else {
-        // il n'est pas admin
+        // If not admin, redirection to the form for connexion
         return $this->redirectToRoute('home');
       }
     }
@@ -257,7 +260,7 @@ class ConsonneController extends AbstractController
 
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       if($this->getUser()->getIsAdmin()){
-       // si c'est true alors il est admin, tu fais ton code
+       // if isAdmin ==True ok
        $breve = new Breves();
        $form = $this->createForm(BreveType::class, $breve);
        $form->handleRequest($request);
@@ -271,7 +274,7 @@ class ConsonneController extends AbstractController
          'formBreve' => $form->createView(),
        ]);
       } else {
-        // il n'est pas admin
+        // if isAdmin = False: redirect to home
         return $this->redirectToRoute('home');
       }
     }
@@ -282,7 +285,7 @@ class ConsonneController extends AbstractController
 
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       if($this->getUser()->getIsAdmin()){
-       // si c'est true alors il est admin, tu fais ton code
+       // if isAdmin ==True ok
        $materiel = new Materiel();
        $form = $this->createForm(MaterielType::class, $materiel);
        $form->handleRequest($request);
@@ -296,7 +299,7 @@ class ConsonneController extends AbstractController
          'formMateriel' => $form->createView(),
        ]);
       } else {
-        // il n'est pas admin
+        // if isAdmin = False: redirect to home
         return $this->redirectToRoute('home');
       }
     }
@@ -307,7 +310,7 @@ class ConsonneController extends AbstractController
 
       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
       if($this->getUser()->getIsAdmin()){
-       // si c'est true alors il est admin, tu fais ton code
+       // if isAdmin ==True ok
        $game = new Game();
        $form = $this->createForm(GameType::class, $game);
        $form->handleRequest($request);
@@ -326,7 +329,7 @@ class ConsonneController extends AbstractController
          'formGame' => $form->createView(),
        ]);
       } else {
-        // il n'est pas admin
+        // if isAdmin = False: redirect to home
         return $this->redirectToRoute('home');
       }
     }
@@ -339,8 +342,8 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
        if($this->getUser()->getIsAdmin()){
-        // si c'est true alors il est admin, tu fais ton code
         if(!$user){
+          //create user if don't exist
           $user = new Users();
         }
 
@@ -349,16 +352,16 @@ class ConsonneController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-          //Vérifie si compte à créer ou à éditer
+          //verify if users exist
           if(!$user->getId()){
-            //Date de création du compte
+            //add the date
             $user->setSubAt(new \Datetime());
-            //calcul de l'age
+            //calcul the age
             $date = $user->getSubAt($user);
             $naissance = $user->getBirthDate($user);
             $age_date = $date->diff($naissance);
             $age = $age_date->format('%y');
-            //ajout du pegi
+            //add pegi
             if ($age < 7) {
               $user->setPegi(3);
             }elseif ($age >= 7 && $age< 9) {
@@ -372,16 +375,16 @@ class ConsonneController extends AbstractController
             }else {
               $user->setPegi(18);
             }
-            //vérification du statut
+            //vérification of the statut
             $statu = $user->getStatut($user);
-            //détermination du isAdmin et ajout en bdd
+            //set isAdmin true or false and add
             if ($statu == 'administrateur') {
               $user->setIsAdmin(TRUE);
             }else{
               $user->setIsAdmin(FALSE);
             }
           }
-
+          //hash the password
           $hash = $encoder->encodePassword($user, $user->getPassword());
           $user->setPassword($hash);
           $manager->persist($user);
@@ -395,7 +398,6 @@ class ConsonneController extends AbstractController
           'editMode' => $user->getId() !== null
         ]);
        } else {
-         // il n'est pas admin donc soit tu le laisses, soit tu le dégages en faisant un return $this->redirectToRoute('ta route')
          return $this->redirectToRoute('home');
        }
 
@@ -410,7 +412,6 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
        if($this->getUser()->getIsAdmin()){
-        // si c'est true alors il est admin, tu fais ton code
         $liste = $repo->findByStatut('adherent');
 
           return $this->render('consonne/list_adherents.html.twig', [
@@ -429,7 +430,6 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if($this->getUser()->getIsAdmin()){
-         // si c'est true alors il est admin, tu fais ton code
          $liste = $repo->findByStatut('administrateur');
 
            return $this->render('consonne/list_admins.html.twig', [
@@ -448,7 +448,6 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
        if($this->getUser()->getIsAdmin()){
-        // si c'est true alors il est admin, tu fais ton code
         $liste = $repo->findAll();
 
           return $this->render('consonne/list_resa.html.twig', [
@@ -467,7 +466,6 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if($this->getUser()->getIsAdmin()){
-         // si c'est true alors il est admin, tu fais ton code
          $liste = $repo->findAll();
 
            return $this->render('consonne/list_breves.html.twig', [
@@ -486,7 +484,6 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if($this->getUser()->getIsAdmin()){
-         // si c'est true alors il est admin, tu fais ton code
          $liste = $repo->findAll();
 
            return $this->render('consonne/list_materiel.html.twig', [
@@ -504,7 +501,6 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if($this->getUser()->getIsAdmin()){
-         // si c'est true alors il est admin, tu fais ton code
          $liste = $repo->findAll();
 
            return $this->render('consonne/list_games.html.twig', [
@@ -523,6 +519,7 @@ class ConsonneController extends AbstractController
        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
        if($this->getUser()->getIsAdmin()){
+         //get all data for the statistic
         $liste = $repo->findAll();
         $pegi3 = $adher->findByPegi(3);
         $pegi7 = $adher->findByPegi(7);
