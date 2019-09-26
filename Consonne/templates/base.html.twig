@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
+    {# Only user can see all of this #}
         {% if app.user %}
         <header>
           <div class="head d-flex flex-wrap">
@@ -34,7 +35,7 @@
           </div>
 
         </header>
-
+        {# Only admin can see this #}
         {% if app.user.isAdmin %}
         <div class="row corps d-flex justify-content-center">
 
