@@ -65,8 +65,8 @@
            </div>
 
 
-           <div class="chgt_pass d-flex align-self-center animated fadeInUp">
-             <h2>Changement de mot de passe</h2>
+           <div class="chgt_pass d-flex flex-column align-self-center animated fadeInUp">
+             <h2 class="align-self-center row-wrap">Changement de mot de passe</h2>
              {{ form_start(formUser) }}
              {{ form_row(formUser.password, {'label': 'Choisissez votre nouveau mot de passe', 'attr':{'placeholder':"Nouveau mot de passe"}}) }}
              {{ form_row(formUser.confirm_password, {'label': 'Confirmez le mot de passe', 'attr':{'placeholder':"Confimation du mot de passe"}}) }}
