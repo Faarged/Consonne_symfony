@@ -25,6 +25,7 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 1em;
+  max-width: 100%;
 }
 
 .row{
@@ -157,6 +158,7 @@ nav {
   display: flex;
   flex-flow: column;
   flex:1;
+  max-width: 100% !important;
 }
 
 .accueil{
@@ -293,6 +295,7 @@ footer {
   margin-top: auto;
   background: #B8FFF3;
   padding-bottom: 1em;
+  max-width: 100%;
 }
 footer > div {
   background: #B8FFF3;
@@ -309,11 +312,5 @@ footer > div {
     width:90%;
     text-align: center;
   }
-  .contenu{
-
-  }
-}
-@media screen and (max-width:640px){
-
 
 }

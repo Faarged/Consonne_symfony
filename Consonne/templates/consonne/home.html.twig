@@ -22,7 +22,8 @@
                 </div>
                 {% if app.user.isAdmin %}
                 <div class="perso animated fadeInRight">
-                  <table><br>
+                <div class="table-responsive">
+                  <table class="table"><br>
                     <caption>Les prochains départs</caption>
                     <tr>
                       <td>Nom</td>
@@ -45,12 +46,14 @@
                   {% endif %}
                   {% endfor %}
                   </table>
+                  </div>
                 </div>
                 {% endif %}
 
                 {% if app.user.isAdmin == false %}
                 <div class="ingame_time animated fadeInRight">
-                  <table>
+                <div class="table-responsive">
+                  <table class="table">
                     <caption>Mes réservations du jours</caption>
                     <tr>
                       <td>Heure de réservation</td>
@@ -70,6 +73,7 @@
 
                   {% endfor %}
                   </table>
+                  </div>
                 </div>
                 {% endif %}
                 {% if breve != null %}

@@ -23,7 +23,8 @@ Réservations
     </div>
     <div class="perso d-flex flex-column animated fadeInUp">
     {% if app.user.isAdmin == false %}
-      <table>
+    <div class="table-responsive">
+      <table class="table">
         <caption>Mes dernières réservations</caption>
         <tr>
           <td>Date de réservation</td>
@@ -45,6 +46,7 @@ Réservations
       {% endfor %}
       </table>
       </div>
+      </div>
     </div>
     {% elseif app.user.isAdmin %}
     {{ form_start(formResa) }}
@@ -59,7 +61,8 @@ Réservations
     </div>
     {{ form_end(formResa) }}
     <div class ="d-flex justify-content-center mt-2">
-    <table>
+    <div class="table-responsive">
+    <table class="table">
       <caption>Les réservations du jour</caption>
       <tr>
         <td>Auteur de la réservation</td>
@@ -86,6 +89,7 @@ Réservations
     {% endif %}
     {% endfor %}
     </table>
+    </div>
     </div>
     </div>
   </div>
