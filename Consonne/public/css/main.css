@@ -18,14 +18,17 @@ Merci d'utiliser COSP et de faire vivre ce programme !
 html {
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
+  width: 100%;
 }
 
 body {
   background-color: white;
-  display: flex;
+  /*display: flex;*/
   flex-direction: column;
   font-size: 1em;
   max-width: 100%;
+  height: auto;
+  width: 100%;
 }
 
 .row{
@@ -42,7 +45,7 @@ hr {
   background-color: black;
   color: black;
   border: black solid 1px;
-  width:100%;
+  max-width:100%;
 }
 
 h1 {
@@ -50,7 +53,6 @@ h1 {
 }
 
 html, body {
-  height: 100%;
   padding: 0;
   margin: 0;
 }
@@ -80,9 +82,6 @@ header > p {
 
 .head {
   margin-left: 5%;
-  }
-
-.head {
   margin-right: 5%;
   }
 
@@ -153,7 +152,7 @@ nav {
   margin-bottom: 1em;
 }
 .contenu{
-  padding-left: 1em;
+  padding-left: 0.5em;
   padding-right: 0.5em;
   margin-top: 0.5em;
   display: flex;
@@ -246,7 +245,6 @@ select {
   margin-top: 0.5em;
   padding: 0.5em;
   background: #5DB3A4;
-
 }
 table > caption{
   color: white;

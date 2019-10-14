@@ -34,7 +34,7 @@ var myChart = new Chart(ctx, {
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
         '-6ans',
-        '6-8ans',
+        '7-8ans',
         '9-11ans',
         '12-15ans',
         '16-17ans',

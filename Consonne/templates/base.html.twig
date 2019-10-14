@@ -4,10 +4,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="/css/animate.css">
         <link rel="stylesheet" href="/css/fontawesome-5.9.0/css/all.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
     {# Only user can see all of this #}
@@ -21,7 +24,7 @@
           </div>
           <div class="barre animated slideInDown">
             <hr>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar d-flex justify-content-around navbar-expand-lg navbar-light bg-light">
               <a class="navbar-brand" href="{{ path('home') }}">Consonne</a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,19 +40,15 @@
                 </div>
               </div>
             </nav>
-
-
             <hr>
           </div>
-
         </header>
         {# Only admin can see this #}
         {% if app.user.isAdmin %}
-        <div class="row corps d-flex justify-content-center">
-
+        <div class="row corps d-flex justify-content-center">{#this div is closed in
+        the other page, there is no error here#}
           <div class="navadmin animated fadeInLeft">
             <nav class="d-flex flex-column justify-content-between">
-
               <h3>Administration</h3>
               <ul>
                 <li><a href="{{ path('user_account') }}">Adhérents</a></li>
@@ -66,7 +65,6 @@
       {% endif %}
       {% endif %}
         {% block body %}{% endblock %}
-
         {% if app.user %}
         <footer class="d-flex flex-column text-dark animated fadeInUp">
           <div class="col-12">
@@ -81,10 +79,13 @@
 
         </footer>
         {% endif %}
-
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

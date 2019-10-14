@@ -1,32 +1,35 @@
 html {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
+  width: 100%;
 }
 
-
+.row{
+  max-width: 100%;
+}
 
 body {
-  margin: 0px;
   display: flex;
   flex-direction: column;
   background-color: white;
+  max-width: 100%;
 }
 
 html, body {
   height: 100%;
   padding: 0;
   margin: 0;
+  max-width: 100%;
 }
 
 .formulaire_co{
   display: flex;
   flex: 1 1 auto;
   flex-flow: column wrap;
+  align-self: center;
   align-items: center;
-  margin:auto;
   font-size: 1.1em;
+  max-width: 100%;
 }
 
 .form_co{
@@ -56,4 +59,5 @@ button:hover{
 
 img {
   margin-top: 10%;
+  max-width: 100%;
 }
